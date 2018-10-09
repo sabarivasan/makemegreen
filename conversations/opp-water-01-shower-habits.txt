@@ -1,0 +1,14 @@
+
+I would like to reduce my water consumption
+                                 Great, I can help you with that!
+                                 How long do you shower every day?
+10 minutes
+                                 Great, do you keep the water running throughout your shower?
+Yes
+                                 Did you know that the average American shower uses 17.2 gallons (65.1 liters) and lasts for 8.2 minutes at average flow rate of 2.1 gallons per minute (gpm) (7.9 lpm).
+                                 Consider limiting your shower to 5 minutes every day.
+                                 Also, consider shutting off the water while you are lathering.
+                                 This saves 70 gallons of water per week and gives you XX green points per week!
+
+Links:
+https://www.home-water-works.org/indoor-use/showers

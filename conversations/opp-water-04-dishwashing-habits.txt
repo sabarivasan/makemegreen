@@ -1,0 +1,13 @@
+
+I would like to reduce my water consumption
+                                 Great, I can help you with that!
+                                 Do you hand wash vessels?
+Yes
+                                 Great, do you keep the water running while you are scrubbing the vessels?
+Yes
+                                 Did you know that the average American kitchen tap has a flow rate of XX gallons per minute?
+                                 Consider rinsing your vessels and closing the tap while you are scrubbing them.
+                                 This saves XX gallons of water per week and gives you XX green points per week!
+
+Links:
+https://www.nrdc.org/stories/9-tricks-save-tons-water
