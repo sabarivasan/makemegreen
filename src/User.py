@@ -4,14 +4,11 @@ import boto3
 from botocore.exceptions import ClientError
 
 import LambdaEnviron
-import DBSchema
 import json
+import DynamoDB
 
 # COLUMNS
 EMAIL_ADDRESS = 'email_address'
-
-region = LambdaEnviron.get_aws_region()
-dynamodb = boto3.client('dynamodb', region_name=region, endpoint_url=DBSchema.get_endpoint_url(region))
 
 # Helper class to convert a DynamoDB item to JSON.
 class DecimalEncoder(json.JSONEncoder):
@@ -23,13 +20,14 @@ class DecimalEncoder(json.JSONEncoder):
                 return int(o)
         return super(DecimalEncoder, self).default(o)
 
+
 class User:
 
     def __init__(self, email_address):
         self.email_address = email_address
-        self.user_table = dynamodb.Table(DBSchema.USERS_TABLE)
-        self.user = None
-
+        self.dynamo_client = DynamoDB.create_client()
+        self.user_table = self.dynamo_client.Table(DynamoDB.USERS_TABLE)
+        self.upsert_user()
 
     def load_from_db(self):
         try:
@@ -38,15 +36,20 @@ class User:
             })
         except ClientError as e:
             print("Error reading user" + e.response['Error']['Message'])
-            self.user = None
+            return False
         else:
             self.user = response['Item']
             print("User read succeeded:")
             print(json.dumps(self.user, indent=4, cls=DecimalEncoder))
-        return self.user
+            return True
 
     def upsert_user(self):
         if not self.load_from_db():
-            dynamodb.put_item(Item={
-                EMAIL_ADDRESS: self.email_address
-            })
+            self.user = {EMAIL_ADDRESS: self.email_address}
+            self.user_table.put_item(Item=self.user)
+
+    def persist(self):
+        self.dynamo_client.put_item(Item=self.user)
+
+    def get_user_obj(self):
+        return self.user

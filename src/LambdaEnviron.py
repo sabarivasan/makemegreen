@@ -24,4 +24,5 @@ def get_required_env(name):
     v = os.environ.get(name)
     if not v:
         raise NameError("undefined env var {}".format(name))
+    return v
 
