@@ -37,6 +37,10 @@ table = dynamodb.create_table(
         {
             'AttributeName': 'id',
             'AttributeType': 'N'
+        },
+        {
+            'AttributeName': 'category',
+            'AttributeType': 'S'
         }
     ],
     ProvisionedThroughput={
