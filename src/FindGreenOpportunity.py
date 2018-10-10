@@ -24,7 +24,7 @@ def handle(event, content):
     session_attrs[CC.OPPORTUNITY_TYPE] = opportunity_type
 
     if not LexUtils.is_slot_present(slots, CC.EMAIL_ADDRESS):
-        message = "Can you provide your email address so we can lookup your green history?"
+        message = "Can you provide your email address or phone number so we can lookup your green history?"
         return LexUtils.elicit_slot(session_attrs, intent_name, slots, CC.EMAIL_ADDRESS, message, None)
     email_address = slots[CC.EMAIL_ADDRESS]
     session_attrs[CC.EMAIL_ADDRESS] = email_address

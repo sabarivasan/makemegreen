@@ -12,14 +12,15 @@ def close(session_attributes, fullfilled, message, responseCard):
     }
 
 def cleanse_email(email_address):
-    email_address = email_address.strip(">")
-    email_address = email_address.strip("<")
-    if email_address.find("|") != -1:
-        email_address = email_address.split("|")[1]
-    if email_address.find("mailto:") != -1:
-        email_address = email_address.split(":")[1]
-
-    return email_address
+    if email_address.find("@") == -1:
+        return email_address.replace("-", "").replace("(", "").replace(")", "").replace(" ", "")
+    else:
+        email_address = email_address.strip(">").strip("<")
+        if email_address.find("|") != -1:
+            email_address = email_address.split("|")[1]
+        if email_address.find("mailto:") != -1:
+            email_address = email_address.split(":")[1]
+        return email_address
 
 def elicit_slot(session_attributes, intent_name, slots, slot_to_elicit, message, response_card):
     return {
