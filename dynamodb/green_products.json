@@ -1,0 +1,25 @@
+[
+    {
+        "id" : 1,
+        "name" : "FinalStaw",
+        "category" : "plastic",
+        "seller": "https://finalstraw.com"
+    },
+    {
+        "id" : 2,
+        "name" : "BMW i3",
+        "category" : "gas",
+        "seller": "BMW"
+    },
+    {
+        "id" : 3,
+        "name" : "Fairphone",
+        "seller": "https://www.fairphone.com/"
+    },
+    {
+        "id" : 4,
+        "name" : "Desso carpet",
+        "category" : "plastic",
+        "seller": "http://www.desso-businesscarpets.com/"
+    }
+]

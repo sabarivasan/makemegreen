@@ -12,9 +12,42 @@ table = dynamodb.create_table(
             'KeyType': 'HASH'  #Partition key
         }
     ],
+    GlobalSecondaryIndexes=[
+        {
+            'IndexName': 'idx_type',
+            'KeySchema': [
+                {
+                    'KeyType': 'HASH',
+                    'AttributeName': 'type'
+                },
+                {
+                    'KeyType': 'RANGE',
+                    'AttributeName': 'person_points_per_day'
+                }
+            ],
+            # Note: since we are projecting all the attributes of the table
+            # into the LSI, we could have set ProjectionType=ALL and
+            # skipped specifying the NonKeyAttributes
+            'Projection': {
+                'ProjectionType': 'ALL',
+            },
+            'ProvisionedThroughput': {
+                'ReadCapacityUnits': 10,
+                'WriteCapacityUnits': 10
+            }
+        }
+    ],
     AttributeDefinitions=[
         {
             'AttributeName': 'id',
+            'AttributeType': 'N'
+        },
+        {
+            'AttributeName': 'type',
+            'AttributeType': 'S'
+        },
+        {
+            'AttributeName': 'person_points_per_day',
             'AttributeType': 'N'
         }
     ],
