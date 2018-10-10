@@ -11,7 +11,7 @@ with open("green_opportunities.json") as json_file:
     opportunities = json.load(json_file)
     for op in opportunities:
         opid = int(op['id'])
-        points = int(op['points'])
+        points = int(op['person_points_per_day'])
         name = op['name']
         optype = op['type']
 
@@ -22,6 +22,6 @@ with open("green_opportunities.json") as json_file:
                'id': opid,
                'name': name,
                'type': optype,
-               'points': points
+               'person_points_per_day': points
             }
         )

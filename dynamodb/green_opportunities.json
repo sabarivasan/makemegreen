@@ -3,54 +3,54 @@
         "id" : 1,
         "name" : "steel cutlery",
         "type" : "plastic",
-        "points": 1
+        "person_points_per_day": 1
     },
     {
         "id" : 2,
         "name" : "grocery bag",
         "type" : "plastic",
-        "points": 1
+        "person_points_per_day": 1
     },
     {
         "id" : 3,
         "name" : "takeout containers",
         "type" : "plastic",
-        "points": 1
+        "person_points_per_day": 1
     },
     {
         "id" : 4,
         "name" : "resuable bottle",
         "type" : "plastic",
-        "points": 1
+        "person_points_per_day": 1
     },
     {
         "id" : 5,
         "name" : "straws",
         "type" : "plastic",
-        "points": 1
+        "person_points_per_day": 1
     },
     {
         "id" : 6,
         "name" : "shower",
         "type" : "water",
-        "points": 1
+        "person_points_per_day": 5
     },
     {
         "id" : 7,
         "name" : "dishwasher",
         "type" : "water",
-        "points": 1
+        "person_points_per_day": 5
     },
     {
         "id" : 8,
         "name" : "garden",
         "type" : "water",
-        "points": 1
+        "person_points_per_day": 10
     },
     {
         "id" : 8,
         "name" : "water leaks",
         "type" : "water",
-        "points": 1
+        "person_points_per_day": 5
     }
 ]

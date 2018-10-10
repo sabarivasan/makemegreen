@@ -8,14 +8,14 @@ table = dynamodb.create_table(
     TableName='green_users',
     KeySchema=[
         {
-            'AttributeName': 'id',
+            'AttributeName': 'email_address',
             'KeyType': 'HASH'  #Partition key
         }
     ],
     AttributeDefinitions=[
         {
-            'AttributeName': 'id',
-            'AttributeType': 'N'
+            'AttributeName': 'email_address',
+            'AttributeType': 'S'
         }
     ],
     ProvisionedThroughput={
