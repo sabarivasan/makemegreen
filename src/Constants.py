@@ -4,6 +4,7 @@ EMPTY_OBJ = {}
 # Intents
 FIND_GREEN_OPPORTUNITY = "FindGreenOpportunity"
 GET_POINTS = "GetPoints"
+GET_PRODUCT_RECOMMENDATION = "GetProductRecommendation"
 
 # Slots
 OPPORTUNITY_TYPE = "opportunityType"
