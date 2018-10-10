@@ -1,25 +1,37 @@
 [
     {
         "id" : 1,
-        "name" : "FinalStaw",
-        "category" : "plastic",
-        "seller": "https://finalstraw.com"
+        "name" : "Olay Soothing Cucumber Bar Soap",
+        "category" : "bar soap",
+        "seller": "Olay",
+        "rating": 3
     },
     {
         "id" : 2,
-        "name" : "BMW i3",
-        "category" : "gas",
-        "seller": "BMW"
+        "name" : "Dove Sensitive Skin Beauty Soap",
+        "category" : "bar soap",
+        "seller": "Bar soap",
+        "rating": 7
     },
     {
         "id" : 3,
-        "name" : "Fairphone",
-        "seller": "https://www.fairphone.com/"
+        "name" : "Attitude Laundry Detergent",
+        "category": "laundry detergent",
+        "seller": "Attitude",
+        "rating": 10
     },
     {
         "id" : 4,
-        "name" : "Desso carpet",
-        "category" : "plastic",
-        "seller": "http://www.desso-businesscarpets.com/"
+        "name" : "All Oxi Liquid Detergent",
+        "category" : "laundry detergent",
+        "seller": "All",
+        "rating": 1
+    },
+    {
+        "id" : 5,
+        "name" : "Earth Friendly Products ECOS Laundry Detergent, Free & Clear ",
+        "category" : "laundry detergent",
+        "seller": "ECOS",
+        "rating": 5
     }
 ]
