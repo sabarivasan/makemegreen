@@ -20,8 +20,9 @@ with open("green_opportunities.json") as json_file:
         table.put_item(
            Item={
                'id': opid,
+               'person_points_per_day': points,
                'name': name,
-               'type': optype,
-               'person_points_per_day': points
+               'type': optype
+               
             }
         )

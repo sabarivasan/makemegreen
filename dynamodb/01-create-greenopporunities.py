@@ -10,12 +10,20 @@ table = dynamodb.create_table(
         {
             'AttributeName': 'id',
             'KeyType': 'HASH'  #Partition key
+        },
+        {
+            'AttributeName': 'person_points_per_day',
+            'KeyType': 'RANGE'  #Sort key
         }
     ],
     AttributeDefinitions=[
         {
             'AttributeName': 'id',
             'AttributeType': 'N'
+        },
+        {
+            'AttributeName': 'person_points_per_day',
+            'AttributeType': 'N'  #Sort key
         }
     ],
     ProvisionedThroughput={
