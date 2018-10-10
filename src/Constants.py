@@ -5,7 +5,5 @@ EMPTY_OBJ = {}
 FIND_GREEN_OPPORTUNITY = "FindGreenOpportunity"
 
 # Slots
-OPPORTUNITY_TYPE = "OpportunityType"
+OPPORTUNITY_TYPE = "opportunityType"
 
-# AWS constants
-DYNAMO_DB_NAME = 'blah'

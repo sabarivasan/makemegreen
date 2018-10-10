@@ -22,10 +22,13 @@ def elicit_slot(session_attributes, intent_name, slots, slot_to_elicit, message,
         'sessionAttributes': session_attributes,
         'dialogAction': {
             'type': 'ElicitSlot',
+            'message': {
+                'contentType': 'PlainText',
+                'content': message
+            },
             'intentName': intent_name,
             'slots': slots,
             'slotToElicit': slot_to_elicit,
-            'message': message,
             'responseCard': response_card
         }
     }
@@ -45,16 +48,19 @@ def confirm_intent(session_attributes, intent_name, slots, message, response_car
 
 
 def is_slot_present(slots, slot):
-    return slot in slots
+    return slot in slots and slots[slot]
 
 
 def lambda_handler(event, context):
     intent_name = event['currentIntent']['name']
     slots = event['currentIntent']['slots']
 
+    print("input event = " + json.dumps(event))
+
     if CC.FIND_GREEN_OPPORTUNITY == intent_name:
         if not is_slot_present(slots, CC.OPPORTUNITY_TYPE):
-            return elicit_slot(CC.EMPTY_OBJ, intent_name, slots, CC.OPPORTUNITY_TYPE, None, CC.EMPTY_OBJ)
+            message = "Would you like to learn about paper, plastic or water consumption today?"
+            return elicit_slot(CC.EMPTY_OBJ, intent_name, slots, CC.OPPORTUNITY_TYPE, message, None)
         opportunityType = slots[CC.OPPORTUNITY_TYPE]
 
     message = "You can reduce the {} consumption by consuming less".format(opportunityType)
@@ -67,32 +73,28 @@ if "__main__" == __name__:
     event = {
         "currentIntent": {
             "name": CC.FIND_GREEN_OPPORTUNITY,
-            "slots": {}
+            "slots": {
+                "opportunityType": None
+            }
         }
     }
     print(json.dumps(lambda_handler(event, None)))
 
 # Response
-# return {
-#     "sessionAttributes": {
-#          "key1": "value1",
-#          "key2": "value2"
+#   "dialogAction": {
+#     "type": "ElicitSlot",
+#     "message": {
+#       "contentType": "PlainText or SSML or CustomPayload",
+#       "content": "Message to convey to the user. For example, What size pizza would you like?"
 #     },
-#     "dialogAction": {
-#         "type": "ConfirmIntent",
-#         "message": {
-#             "contentType": "PlainText or SSML or CustomPayload",
-#             "content": "Message to convey to the user. For example, Are you sure you want a large pizza?"
-#         },
-#         "intentName": "intent-name",
-#         "slots": {
-#             "slot-name": "value",
-#             "slot-name": "value",
-#             "slot-name": "value"
-#         }
-#     }
-# }
-#
+#    "intentName": "intent-name",
+#    "slots": {
+#       "slot-name": "value",
+#       "slot-name": "value",
+#       "slot-name": "value"
+#    },
+#    "slotToElicit" : "slot-name"
+#   }#
 
 # Input
 # {
