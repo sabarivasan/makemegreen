@@ -45,3 +45,23 @@ def confirm_intent(session_attributes, intent_name, slots, message, response_car
 def is_slot_present(slots, slot):
     return slot in slots and slots[slot]
 
+
+def build_response_card(title, subtitle, options):
+    """
+    Build a responseCard with a title, subtitle, and an optional set of options which should be displayed as buttons.
+    """
+    buttons = None
+    if options is not None:
+        buttons = []
+        for i in range(min(5, len(options))):
+            buttons.append(options[i])
+
+    return {
+        'contentType': 'application/vnd.amazonaws.card.generic',
+        'version': 1,
+        'genericAttachments': [{
+            'title': title,
+            'subTitle': subtitle,
+            'buttons': buttons
+        }]
+    }

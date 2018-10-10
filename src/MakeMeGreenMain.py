@@ -1,20 +1,16 @@
 import json
+
 import Constants as CC
-import User
-import sys
-import LexUtils
 import FindGreenOpportunity
 
 
 def lambda_handler(event, context):
     intent_name = event['currentIntent']['name']
-    slots = event['currentIntent']['slots']
 
     print("input event = " + json.dumps(event))
 
     if CC.FIND_GREEN_OPPORTUNITY == intent_name:
         return FindGreenOpportunity.handle(event, context)
-
 
 
 if "__main__" == __name__:
