@@ -1,6 +1,7 @@
 import json
 import Constants as CC
 import User
+import sys
 
 def close(session_attributes, fullfilled, message, responseCard):
     return {
@@ -56,8 +57,20 @@ def lambda_handler(event, context):
             return elicit_slot(CC.EMPTY_OBJ, intent_name, slots, CC.OPPORTUNITY_TYPE, None, CC.EMPTY_OBJ)
         opportunityType = slots[CC.OPPORTUNITY_TYPE]
 
-    message = "You can reduce the {} consumption by consuming less".format(substance, household)
+    message = "You can reduce the {} consumption by consuming less".format(opportunityType)
     return close(CC.EMPTY_OBJ, True, message, CC.EMPTY_OBJ)
+
+
+if "__main__" == __name__:
+
+    # FIND_GREEN_OPPORTUNITY
+    event = {
+        "currentIntent": {
+            "name": CC.FIND_GREEN_OPPORTUNITY,
+            "slots": {}
+        }
+    }
+    print(json.dumps(lambda_handler(event, None)))
 
 # Response
 # return {
