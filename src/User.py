@@ -1,4 +1,5 @@
 import decimal
+import time
 
 import boto3
 from botocore.exceptions import ClientError
@@ -9,6 +10,8 @@ import DynamoDB
 
 # COLUMNS
 EMAIL_ADDRESS = 'email_address'
+IMPLEMENTED_OPPORTUNITIES = 'implemented_opportunities'
+REFUSED_OPPORTUNITIES = 'refused_opportunities'
 
 # Helper class to convert a DynamoDB item to JSON.
 class DecimalEncoder(json.JSONEncoder):
@@ -50,11 +53,42 @@ class User:
 
     def upsert_user(self):
         if not self.load_from_db():
-            self.user = {EMAIL_ADDRESS: self.email_address}
+            self.user = {EMAIL_ADDRESS: self.email_address,
+                         IMPLEMENTED_OPPORTUNITIES: [],
+                         REFUSED_OPPORTUNITIES: []}
             self.user_table.put_item(Item=self.user)
 
     def persist(self):
         self.dynamo_client.put_item(Item=self.user)
 
-    def get_user_obj(self):
-        return self.user
+    def get_implemented_opportunities(self):
+        return self.get_attr(IMPLEMENTED_OPPORTUNITIES, [])
+
+    def get_refused_opportunities(self):
+        return self.get_attr(REFUSED_OPPORTUNITIES, [])
+
+    def get_attr(self, attr_name, default_val):
+        return self.user[attr_name] if attr_name in self.user else default_val
+
+    def add_implemented_oppty(self, oppty_id, oppty_name):
+        implemented_oppty = {'id': oppty_id, 'name': oppty_name, 'from': int(time.time())}
+        self.add_field_to_arr(implemented_oppty, IMPLEMENTED_OPPORTUNITIES)
+
+    def add_refused_oppty(self, oppty_id, oppty_name):
+        refused_oppty = {'id': oppty_id, 'name': oppty_name, 'on': int(time.time())}
+        self.add_field_to_arr(refused_oppty, REFUSED_OPPORTUNITIES)
+
+    def add_field_to_arr(self, oppty, field_name):
+        response = self.user_table.update_item(Key={
+                EMAIL_ADDRESS: self.email_address
+            },
+            UpdateExpression="SET {0} = list_append({0}, :o)".format(field_name),
+            ExpressionAttributeValues={
+                ':o': [oppty],
+            },
+            ReturnValues="UPDATED_NEW")
+        print("add_implemented_oppty succeeded:")
+        print(json.dumps(response, indent=4, cls=DecimalEncoder))
+
+
+
