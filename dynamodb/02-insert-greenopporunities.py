@@ -11,18 +11,16 @@ with open("green_opportunities.json") as json_file:
     opportunities = json.load(json_file)
     for op in opportunities:
         opid = int(op['id'])
+        optype = op['type']
         points = int(op['person_points_per_day'])
         name = op['name']
-        optype = op['type']
-
         print("Adding opportunities:", opid, name,optype,points)
 
         table.put_item(
            Item={
                'id': opid,
+               'type': optype,
                'person_points_per_day': points,
-               'name': name,
-               'type': optype
-               
+               'name': name
             }
         )
