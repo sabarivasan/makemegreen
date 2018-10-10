@@ -9,6 +9,7 @@ GET_POINTS = "GetPoints"
 OPPORTUNITY_TYPE = "opportunityType"
 POINTS_TIME_PERIOD = "pointsTimePeriod"
 EMAIL_ADDRESS = "emailAddress"
+PRODUCT_TYPE = "productType"
 
 # Point time periods
 DAILY = "daily"
