@@ -24,7 +24,7 @@ class GreenProductLoader:
 
             # Return names of first 5 products
             print(products)
-            return map(lambda p: p['name'], products[:5])
+            return map(lambda p: "Product: {}, Rating: {}".format(p['name'], p['rating']), products[:5])
         except ClientError as e:
             print("Error reading product recommendations " + e.response['Error']['Message'])
             return None
