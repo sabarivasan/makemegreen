@@ -10,6 +10,10 @@ table = dynamodb.create_table(
         {
             'AttributeName': 'id',
             'KeyType': 'HASH'  #Partition key
+        },
+        {
+            'KeyType': 'RANGE',
+            'AttributeName': 'rating'
         }
     ],
     GlobalSecondaryIndexes=[
@@ -19,6 +23,10 @@ table = dynamodb.create_table(
                 {
                     'KeyType': 'HASH',
                     'AttributeName': 'category'
+                },
+                {
+                    'KeyType': 'RANGE',
+                    'AttributeName': 'rating'
                 }
             ],
             # Note: since we are projecting all the attributes of the table
@@ -41,6 +49,10 @@ table = dynamodb.create_table(
         {
             'AttributeName': 'category',
             'AttributeType': 'S'
+        },
+        {
+            'AttributeName': 'rating',
+            'AttributeType': 'N'
         }
     ],
     ProvisionedThroughput={
