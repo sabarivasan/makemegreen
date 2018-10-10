@@ -15,7 +15,9 @@ class GreenOpportunityLoader:
         try:
             # Firstly, find all the green opportunities available
             response = green_opty.query(
-                KeyConditionExpression=Key('type').eq(self.opportunityType)
+                IndexName='idx_type',
+                KeyConditionExpression=Key('type').eq(self.opportunityType),
+                ScanIndexForward=False
             )
             if response['Count'] > 0:
                 available_opportunities = response['items']
