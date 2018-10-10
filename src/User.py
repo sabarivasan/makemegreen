@@ -7,6 +7,7 @@ from botocore.exceptions import ClientError
 import LambdaEnviron
 import json
 import DynamoDB
+import LexUtils
 
 # COLUMNS
 EMAIL_ADDRESS = 'email_address'
@@ -27,6 +28,7 @@ class DecimalEncoder(json.JSONEncoder):
 class User:
 
     def __init__(self, email_address):
+        email_address = LexUtils.cleanse_email(email_address)
         self.email_address = email_address
         self.dynamo_client = DynamoDB.create_client()
         self.user_table = self.dynamo_client.Table(DynamoDB.USERS_TABLE)
