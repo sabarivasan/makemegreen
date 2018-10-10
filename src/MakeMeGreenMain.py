@@ -23,12 +23,45 @@ if "__main__" == __name__:
         "currentIntent": {
             "name": CC.FIND_GREEN_OPPORTUNITY,
             "slots": {
-                "opportunityType": "plastic",
-                "emailAddress": "blah"
+                "opportunityType": "water",
+                "emailAddress": "sabari2@cvent.com"
             }
         },
         "sessionAttributes": {}
     }
+
+#     event = {
+#     "messageVersion": "1.0",
+#     "invocationSource": "DialogCodeHook",
+#     "userId": "72njs51uuv71jj9hggb9mvzvwpzn21ng",
+#     "sessionAttributes": {
+#         "CurrentOpptyId": "8",
+#         "opportunityType": "Water",
+#         "emailAddress": "abc@def.com",
+#         "State": "AwaitingOpportunityConfirmation",
+#         "UserId": "abc@def.com"
+#     },
+#     "bot": {
+#         "name": "MakeMeGreen",
+#         "alias": "$LATEST",
+#         "version": "$LATEST"
+#     },
+#     "outputDialogMode": "Text",
+#     "currentIntent": {
+#         "name": "FindGreenOpportunity",
+#         "slots": {
+#             "opportunityType": "Water",
+#             "yesNo": "no",
+#             "emailAddress": "abc@def.com",
+#             "phoneNumber": None,
+#             "opportunityTask": None,
+#             "lookupType": None
+#         },
+#         "confirmationStatus": "None"
+#     },
+#     "inputTranscript": "yes"
+# }
+
     print(json.dumps(lambda_handler(event, None)))
 
 # Response
