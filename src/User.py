@@ -38,10 +38,15 @@ class User:
             print("Error reading user" + e.response['Error']['Message'])
             return False
         else:
-            self.user = response['Item']
-            print("User read succeeded:")
-            print(json.dumps(self.user, indent=4, cls=DecimalEncoder))
-            return True
+            if 'Item' in response:
+                self.user = response['Item']
+                print("User read succeeded:")
+                print(json.dumps(self.user, indent=4, cls=DecimalEncoder))
+                return True
+            else:
+                print("No user with email address " + self.email_address)
+                return False
+
 
     def upsert_user(self):
         if not self.load_from_db():
