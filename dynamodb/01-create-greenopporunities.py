@@ -10,6 +10,10 @@ table = dynamodb.create_table(
         {
             'AttributeName': 'id',
             'KeyType': 'HASH'  #Partition key
+        },
+        {
+            'KeyType': 'RANGE',
+            'AttributeName': 'person_points_per_day'
         }
     ],
     GlobalSecondaryIndexes=[
