@@ -3,54 +3,64 @@
         "id" : 1,
         "name" : "steel cutlery",
         "type" : "plastic",
-        "person_points_per_day": 1
+        "person_points_per_day": 1,
+        "user_text": "Did you know that 40 billion disposable plastic utensils are used in the U.S. every year?\nConsider keeping one set of stainless steel cutlery and washing them after use.\nThis gives you 1 green points per day!"
     },
     {
         "id" : 2,
         "name" : "grocery bag",
         "type" : "plastic",
-        "person_points_per_day": 1
+        "person_points_per_day": 1,
+        "user_text": "Did you know that a single plastic bag can take upto 1000 years to degrade.\nConsider taking one or more reusable cloth bags to the grocery store.\nYou can buy them at most grocery stores.\nEach reusable bag gives you 1 green points per day!"
     },
     {
         "id" : 3,
         "name" : "takeout containers",
         "type" : "plastic",
-        "person_points_per_day": 1
+        "person_points_per_day": 1,
+        "user_text": "Did you know that using aluminum or glass containers is always preferable over plastic. \nConsider taking your own carry-out container when you dine out.\nYou can keep one in your car at all times\nEach reusable bag gives you 1 green points per day!"
     },
     {
         "id" : 4,
         "name" : "resuable bottle",
         "type" : "plastic",
-        "person_points_per_day": 1
+        "person_points_per_day": 1,
+        "user_text":"Did you know that Americans throw away 35 billion plastic bottles every year.\nConsider taking your own bottle or mug when you go to a coffee or juice shop\nEach reusable drinkware gives you 1 green points per day!"
     },
     {
         "id" : 5,
         "name" : "straws",
         "type" : "plastic",
-        "person_points_per_day": 1
+        "person_points_per_day": 1,
+        "user_text": "Did you know that Americans use 500 Million Straws Every Single Day?\nConsider not using a straw or using a steel straw when you dine out next.\nRefusing straws you 1 green points per day!"
     },
     {
         "id" : 6,
         "name" : "shower",
         "type" : "water",
-        "person_points_per_day": 5
+        "person_points_per_day": 5,
+        "user_text": "Did you know that the average American shower uses 17.2 gallons (65.1 liters) and lasts for 8.2 minutes at average flow rate of 2.1 gallons per minute (gpm) (7.9 lpm).\nConsider limiting your shower to 5 minutes every day.\nAlso, consider shutting off the water while you are lathering.\nThis saves 70 gallons of water per week and gives you 5 green points per day!"
     },
     {
         "id" : 7,
         "name" : "dishwasher",
         "type" : "water",
-        "person_points_per_day": 5
+        "person_points_per_day": 5,
+        "user_text": "Did you know that You use up to 27 gallons of water per load by hand versus as little as 3 gallons with an ENERGY STAR-rated dishwasher.\nUse a dishwasher as much as possible. Just scrape off large food scraps before loading!!\nThis saves 200 gallons of water per week and gives you 5 green points per day!"
     },
     {
         "id" : 8,
         "name" : "garden",
         "type" : "water",
-        "person_points_per_day": 10
+        "person_points_per_day": 10,
+        "user_text": "Did you know that one-third of residential water use goes toward watering the lawn and garden?\nBut flowers, grasses, and bushes native to the area have adapted to regional rainfall rates—so require no water—and have better defenses against predators.\nAnother bonus: Native plants foster healthy soil and insect life, which attract birds and enhance overall biodiversity.\nThis saves 20 gallons of water per day and gives you 10 green points per day!"
+
     },
     {
-        "id" : 8,
+        "id" : 9,
         "name" : "water leaks",
         "type" : "water",
-        "person_points_per_day": 5
+        "person_points_per_day": 5,
+        "user_text": "Did you know that a 1/16-inch opening in a leaking faucet could waste up to 100 gallons a day?\nTour your home monthly, inside and out, in search of dripping faucets, showerheads, hoses, and sprinklers.\nDrop a dye tablet or food coloring in the tank yearly to see if the color of the water in the bowl changes color. If it does, your toilet needs a replacement rubber flapper or fill mechanism.\nThis saves 10 gallons of water per day and gives you 5 green points per day!"
     }
 ]
