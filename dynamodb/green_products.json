@@ -1,37 +1,205 @@
 [
     {
         "id" : 1,
-        "name" : "Olay Soothing Cucumber Bar Soap",
-        "category" : "bar soap",
-        "seller": "Olay",
-        "rating": 3
+        "name" : "Arm & Hammer Fridge & Freezer Baking Soda",
+        "category" : "air freshener",
+        "seller": "ARM & HAMMER",
+        "rating": 5
     },
     {
         "id" : 2,
-        "name" : "Dove Sensitive Skin Beauty Soap",
-        "category" : "bar soap",
-        "seller": "Bar soap",
-        "rating": 7
+        "name" : "Arm & Hammer Fridge Fresh Refrigerator Air Filter",
+        "category" : "air freshener",
+        "seller": "ARM & HAMMER",
+        "rating": 5
     },
     {
         "id" : 3,
-        "name" : "Attitude Laundry Detergent",
-        "category": "laundry detergent",
-        "seller": "Attitude",
-        "rating": 10
+        "name" : "Aura Cacia Aromatherapy Mist, Eucalyptus Harvest",
+        "category": "air freshener",
+        "seller": "Aura Cacia",
+        "rating": 5
     },
     {
         "id" : 4,
-        "name" : "All Oxi Liquid Detergent",
-        "category" : "laundry detergent",
-        "seller": "All",
-        "rating": 1
+        "name" : "Aura Cacia Aromatherapy Mist, Ginger Mint",
+        "category" : "air freshener",
+        "seller": "Aura Cacia",
+        "rating": 5
     },
     {
         "id" : 5,
-        "name" : "Earth Friendly Products ECOS Laundry Detergent, Free & Clear ",
-        "category" : "laundry detergent",
-        "seller": "ECOS",
+        "name" : "Mrs. Meyer's Clean Day Geranium Room Freshener",
+        "category" : "air freshener",
+        "seller": "Mrs. Meyer's",
+        "rating": 4
+    },
+    {
+        "id" : 6,
+        "name" : "Arm & Hammer by Munchkin Nursery Fresheners",
+        "category" : "air freshener",
+        "seller": "Arm & Hammer",
+        "rating": 3
+    },
+    {
+        "id" : 7,
+        "name" : "LYSOL Neutra Air Freshmatic, Lemon Essence ",
+        "category" : "air freshener",
+        "seller": "LYSOL",
+        "rating": 3
+    },
+    {
+        "id" : 8,
+        "name" : "LYSOL Neutra Air Freshmatic, Lemon Essence ",
+        "category" : "air freshener",
+        "seller": "LYSOL",
+        "rating": 3
+    },
+    {
+        "id" : 9,
+        "name" : "AIR WICK Freshmatic Compact, Apple Cinnamon Medley",
+        "category" : "air freshener",
+        "seller": "AIR WICK",
+        "rating": 1
+    },
+    {
+        "id" : 9,
+        "name" : "365 Everyday Value Dishwasher Detergent Packs, Unscented",
+        "category" : "dishwashing cleaners",
+        "seller": "365 Everyday Value",
         "rating": 5
+    },
+    {
+        "id" : 10,
+        "name" : "AspenClean Dish Soap",
+        "category" : "dishwashing cleaners",
+        "seller": "AspenClean",
+        "rating": 5
+    },
+    {
+        "id" : 11,
+        "name" : "Attitude Eco-Friendly Dishwashing Liquid, Ylang-Ylang & Lime",
+        "category" : "dishwashing cleaners",
+        "seller": "Attitude",
+        "rating": 4
+    },
+    {
+        "id" : 12,
+        "name" : "Ajax Dish Packs, Green Apple",
+        "category" : "dishwashing cleaners",
+        "seller": "Ajax",
+        "rating": 3
+    },
+    {
+        "id" : 13,
+        "name" : "FINISH Powerball Tabs with Jet Dry Shine Dishwasher Detergent",
+        "category" : "dishwashing cleaners",
+        "seller": "FINISH",
+        "rating": 3
+    },
+    {
+        "id" : 14,
+        "name" : "FINISH Powerball Tabs with Jet Dry Shine Dishwasher Detergent",
+        "category" : "dishwashing cleaners",
+        "seller": "FINISH",
+        "rating": 3
+    },
+    {
+        "id" : 15,
+        "name" : "Cascade Complete Liquid Dishwashing Detergent with Dawn, Fresh",
+        "category" : "dishwashing cleaners",
+        "seller": "Cascade",
+        "rating": 2
+    },
+    {
+        "id" : 16,
+        "name" : "Dawn Ultra Concentrated Bleach Alternative Dishwashing Liquid, Morning Mist",
+        "category" : "dishwashing cleaners",
+        "seller": "Dawn",
+        "rating": 2
+    },
+    {
+        "id" : 17,
+        "name" : "365 Everyday Value 2X Concentrated Powder Laundry Detergent, Lavender",
+        "category" : "laundry detergent",
+        "seller": "365 Everyday Value",
+        "rating": 5
+    },
+    {
+        "id" : 18,
+        "name" : "Arm & Hammer Super Washing Soda Detergent Booster & Household Cleaner",
+        "category" : "laundry detergent",
+        "seller": "Arm & Hammer",
+        "rating": 5
+    },
+    {
+        "id" : 19,
+        "name" : "Attitude Laundry Detergent, Pink Grapefruit",
+        "category" : "laundry detergent",
+        "seller": "Attitude",
+        "rating": 5
+    },
+    {
+        "id" : 20,
+        "name" : "Berryplus Liquid Laundry Soap",
+        "category" : "laundry detergent",
+        "seller": "Berryplus",
+        "rating": 5
+    },
+    {
+        "id" : 21,
+        "name" : "Better Life Laundry Detergent, Lavender Grapefruit",
+        "category" : "laundry detergent",
+        "seller": "Better Life",
+        "rating": 5
+    },
+    {
+        "id" : 22,
+        "name" : "GrabGreen 3 in 1 Laundry Detergent Pods, Fragrance Free",
+        "category" : "laundry detergent",
+        "seller": "GrabGreen",
+        "rating": 4
+    },
+    {
+        "id" : 23,
+        "name" : "Earthy Laundry Detergent, Natural Petitgrain",
+        "category" : "laundry detergent",
+        "seller": "Earthy",
+        "rating": 4
+    },
+    {
+        "id" : 24,
+        "name" : "Caldrea Lavender Pine Laundry Detergent",
+        "category" : "laundry detergent",
+        "seller": "Caldrea",
+        "rating": 4
+    },
+    {
+        "id" : 25,
+        "name" : "Zum Clean Aromatherapy Liquid Laundry Soap, Patchouli",
+        "category" : "laundry detergent",
+        "seller": "Zum Clean Aromatherapy",
+        "rating": 3
+    },
+    {
+        "id" : 26,
+        "name" : "Whole Foods Market Organic Laundry Detergent, Magnolia & Poppy",
+        "category" : "laundry detergent",
+        "seller": "Whole Foods",
+        "rating": 3
+    },
+    {
+        "id" : 27,
+        "name" : "All Powder Detergent, Free Clear",
+        "category" : "laundry detergent",
+        "seller": "All",
+        "rating": 2
+    },
+    {
+        "id" : 28,
+        "name" : "All Odor Relief Liquid Detergent, Free Clear",
+        "category" : "laundry detergent",
+        "seller": "All",
+        "rating": 2
     }
 ]

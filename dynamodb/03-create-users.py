@@ -8,13 +8,21 @@ table = dynamodb.create_table(
     TableName='green_users',
     KeySchema=[
         {
-            'AttributeName': 'email_address',
+            'AttributeName': 'id_type',
             'KeyType': 'HASH'  #Partition key
+        },
+        {
+            'AttributeName': 'id',
+            'KeyType': 'RANGE' # range key
         }
     ],
     AttributeDefinitions=[
         {
-            'AttributeName': 'email_address',
+            'AttributeName': 'id_type',
+            'AttributeType': 'S'
+        },
+        {
+            'AttributeName': 'id',
             'AttributeType': 'S'
         }
     ],
