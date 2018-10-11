@@ -3,6 +3,7 @@ import json
 import Constants as CC
 import FindGreenOpportunity
 import GetPoints
+import GetProductRecommendation
 
 
 def lambda_handler(event, context):
@@ -14,6 +15,9 @@ def lambda_handler(event, context):
         return FindGreenOpportunity.handle(event, context)
     if CC.GET_POINTS == intent_name:
         return GetPoints.handle(event, context)
+    if CC.GET_PRODUCT_RECOMMENDATION == intent_name:
+        return GetProductRecommendation.handle(event, context)
+
 
 
 if "__main__" == __name__:

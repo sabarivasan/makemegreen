@@ -4,11 +4,13 @@ EMPTY_OBJ = {}
 # Intents
 FIND_GREEN_OPPORTUNITY = "FindGreenOpportunity"
 GET_POINTS = "GetPoints"
+GET_PRODUCT_RECOMMENDATION = "GetProductRecommendation"
 
 # Slots
 OPPORTUNITY_TYPE = "opportunityType"
 POINTS_TIME_PERIOD = "pointsTimePeriod"
 EMAIL_ADDRESS = "emailAddress"
+PRODUCT_TYPE = "productType"
 
 YES_NO = "yesNo"
 
