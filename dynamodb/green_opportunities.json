@@ -29,7 +29,7 @@
         "tags": ["home", "work"],
         "type" : "plastic",
         "person_points_per_week": 14,
-        "user_text":"Did you know that Americans throw away 35 billion plastic bottles every year.\nConsider taking your own bottle or mug when you go to a coffee or juice shop\nEach reusable drinkware gives you 14 green point per week!"
+        "user_text":"Did you know that Americans throw away 35 billion plastic bottles every year.\nConsider taking your own bottle or mug when you go to juice shop\nEach reusable drinkware gives you 14 green point per week!"
     },
     {
         "id" : 5,
@@ -118,5 +118,21 @@
         "type" : "paper",
         "person_points_per_week": 21,
         "user_text": "Did you know that recycling 1 ton of paper saves around 682 gallons of oil, 26500 liters of water and 17 trees?\nRecycle unwanted papers in office and home.\nThis gives you 21 green points per week!"
+    },
+    {
+        "id" : 16,
+        "name" : "reusable coffee mugs",
+        "tags": ["home", "work"],
+        "type" : "paper",
+        "person_points_per_week": 14,
+        "user_text":"Did you know that paper cups are not recyclable because of the plastic liner and coffee contamination?\nConsider taking your own  mug when you go to starbucks.\nEach reusable mug gives you 14 green point per week!"
+    },
+    {
+        "id" : 17,
+        "name" : "recycled papers",
+        "tags": ["home", "work"],
+        "type" : "paper",
+        "person_points_per_week": 14,
+        "user_text":"Did you know that recycled papers look and feel as fine as non-recycled papers?\nInvest in recycled papers.\nThis gives you 14 green point per week!"
     }
 ]
