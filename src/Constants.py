@@ -6,8 +6,11 @@ INTENT_FIND_GREEN_OPPORTUNITY = "FindGreenOpportunity"
 INTENT_GET_POINTS = "GetPoints"
 INTENT_GET_PRODUCT_RECOMMENDATION = "GetProductRecommendation"
 INTENT_GET_POSSIBLE_ACTIONS = "GetPossibleActions"
+INTENT_GREEN_CHALLENGE = "GreenChallenge"
 
 # Slots
+
+# FindGreenOpportunity
 SLOT_OPPORTUNITY_TYPE = "opportunityType"
 SLOT_POINTS_TIME_PERIOD = "pointsTimePeriod"
 SLOT_HOME_OR_WORK = "homeOrWork"
@@ -17,6 +20,14 @@ SLOT_EMAIL_OR_PHONE = "emailOrPhone"
 SLOT_PRODUCT_TYPE = "productType"
 SLOT_YES_NO_GREEN_OPPORTUNITY = "yesNoGreenOpportunity"
 SLOT_YES_NO_IDENTIFYING_INFO_WILLINGNESS = "yesNoIdentifyingInfoWillingness"
+
+# Green challenge
+SLOT_USER_GROUP = "group"
+SLOT_LOCATIONS = "locations"
+SLOT_OPPORTUNITY_TYPE_OR_ALL = "opportunityTypeOrAll"
+SLOT_START = "start"
+SLOT_END = "end"
+SLOT_CHALLENGE_NAME = "challengeName"
 
 # Point time periods
 DAILY = "daily"
