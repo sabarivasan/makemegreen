@@ -40,69 +40,62 @@ if "__main__" == __name__:
     event = {
     "messageVersion": "1.0",
     "invocationSource": "DialogCodeHook",
-    "userId": "w6oya0njyqxijub0gnf0xi3w5o1yiyv1",
-    "sessionAttributes": {
-        "CurrentOpptyId": "8",
-        "opportunityType": "water",
-        "State": "AwaitingOpportunityConfirmation",
-        "userIdType": "Phone",
-        "CurrentOpptyName": "garden",
-        "anonymous": "false",
-        "userId": "5555555555"
+    "userId": "ea4b1552-45f0-4fe1-ab45-b3a9b0e46485:TDAGGP9DH:UDAE42BA4",
+    "sessionAttributes": {},
+    "requestAttributes": {
+        "x-amz-lex:channel-id": "ea4b1552-45f0-4fe1-ab45-b3a9b0e46485",
+        "x-amz-lex:webhook-endpoint-url": "https://channels.lex.us-east-1.amazonaws.com/slack/webhook/ea4b1552-45f0-4fe1-ab45-b3a9b0e46485",
+        "x-amz-lex:accept-content-types": "PlainText",
+        "x-amz-lex:user-id": "452560791459.454526013046",
+        "x-amz-lex:slack-team-id": "TDAGGP9DH",
+        "x-amz-lex:slack-bot-token": "xoxb-452560791459-453003707012-7AZT1oG1DlRqmIhaPIlR2L8Y",
+        "x-amz-lex:channel-name": "BotSlackIntegration",
+        "x-amz-lex:channel-type": "Slack"
     },
-    "requestAttributes": None,
     "bot": {
         "name": "MakeMeGreen",
-        "alias": "$LATEST",
-        "version": "$LATEST"
+        "alias": "verA",
+        "version": "9"
     },
     "outputDialogMode": "Text",
     "currentIntent": {
         "name": "FindGreenOpportunity",
         "slots": {
-            "opportunityType": "water",
+            "opportunityType": "plastic",
             "phone": None,
-            "yesNoGreenOpportunity": "yes",
+            "yesNoGreenOpportunity": None,
             "emailOrPhone": None,
-            "yesNoIdentifyingInfoWillingness": "yes"
+            "yesNoIdentifyingInfoWillingness": None
         },
         "slotDetails": {
             "opportunityType": {
                 "resolutions": [
                     {
-                        "value": "water"
+                        "value": "plastic"
                     }
                 ],
-                "originalValue": "water"
+                "originalValue": "plastic"
             },
             "phone": {
                 "resolutions": [],
                 "originalValue": None
             },
             "yesNoGreenOpportunity": {
-                "resolutions": [
-                    {
-                        "value": "Yes"
-                    }
-                ],
-                "originalValue": "yes"
+                "resolutions": [],
+                "originalValue": None
             },
             "emailOrPhone": {
                 "resolutions": [],
                 "originalValue": None
             },
             "yesNoIdentifyingInfoWillingness": {
-                "resolutions": [
-                    {
-                        "value": "Yes"
-                    }
-                ],
-                "originalValue": "yes"
+                "resolutions": [],
+                "originalValue": None
             }
         },
         "confirmationStatus": "None"
     },
-    "inputTranscript": "yes"
+    "inputTranscript": "plastic"
 }
  
     print(json.dumps(lambda_handler(event, None)))

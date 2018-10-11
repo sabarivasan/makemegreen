@@ -30,11 +30,12 @@ def handle(event, content):
     intent_name = event['currentIntent']['name']
     slots = event['currentIntent']['slots']
     session_attrs = event['sessionAttributes'] if event['sessionAttributes'] is not None else {}
+    request_attrs = event['requestAttributes'] if event['requestAttributes'] is not None else {}
     userId = event[CC.EVENT_INPUT_USER_ID]
     outputDialogMode = event[CC.EVENT_INPUT_OUTPUT_DIALOG_MODE]
     is_voice = "Voice" == outputDialogMode
     is_text = "Text" == outputDialogMode
-    is_slack = CC.USER_ATTR_CHANNEL_TYPE in session_attrs and "Slack" == session_attrs[CC.USER_ATTR_CHANNEL_TYPE]
+    is_slack = CC.USER_ATTR_CHANNEL_TYPE in request_attrs and "Slack" == request_attrs[CC.USER_ATTR_CHANNEL_TYPE]
     user = None
 
     # First, find out what opportunity type they are interested in hearing about
