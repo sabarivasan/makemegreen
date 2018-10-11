@@ -30,6 +30,8 @@ def lambda_handler(event, context):
         return GetPoints.handle(event, context)
     if CC.INTENT_GET_PRODUCT_RECOMMENDATION == intent_name:
         return GetProductRecommendation.handle_alexa(event, context) if is_alexa else GetProductRecommendation.handle_lex(event, context)
+    if CC.INTENT_GET_POSSIBLE_ACTIONS == intent_name and is_alexa:
+        return AlexaUtils.delegate(event['session'].get('attributes', {}), intent_name, {})
     else:
         raise ValueError("Invalid intent")
 
