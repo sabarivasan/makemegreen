@@ -64,4 +64,4 @@ def handle_alexa(event, content):
                                      AlexaUtils.build_speechlet_response("Point Period", message, None, False))
 
 
-def get_points(user, points_period_days):
+#def get_points(user, points_period_days):

@@ -16,11 +16,14 @@ def set_session_user_id_and_type(event, is_alexa):
     else:
         intent_name = event['currentIntent']['name']
         slots = event['currentIntent']['slots']
-        session_attrs = event['sessionAttributes'] if event['sessionAttributes'] is not None else {}
+        session_attrs = event['sessionAttributes'] if 'sessionAttributes' in event and event[
+            'sessionAttributes'] is not None else {}
+        request_attrs = event['requestAttributes'] if 'requestAttributes' in event and event[
+            'requestAttributes'] is not None else {}
         output_dialog_mode = event[CC.EVENT_INPUT_OUTPUT_DIALOG_MODE]
         is_voice = "Voice" == output_dialog_mode
         is_text = "Text" == output_dialog_mode
-        is_slack = CC.USER_ATTR_CHANNEL_TYPE in session_attrs and "Slack" == session_attrs[CC.USER_ATTR_CHANNEL_TYPE]
+        is_slack = CC.USER_ATTR_CHANNEL_TYPE in request_attrs and "Slack" == request_attrs[CC.USER_ATTR_CHANNEL_TYPE]
         user_id = event[CC.EVENT_INPUT_USER_ID]
 
     if CC.SESS_ATTR_STATE not in session_attrs:
