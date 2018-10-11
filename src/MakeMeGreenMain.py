@@ -33,7 +33,10 @@ def lambda_handler(event, context):
     if CC.INTENT_GET_PRODUCT_RECOMMENDATION == intent_name:
         return GetProductRecommendation.handle_alexa(event, context) if is_alexa else GetProductRecommendation.handle_lex(event, context)
     if CC.INTENT_GET_POSSIBLE_ACTIONS == intent_name and is_alexa:
-        return AlexaUtils.delegate(event['session'].get('attributes', {}), intent_name, {})
+        output = "You can ask for a way to reduce your environmental footprint, ask for a green product " \
+                 "recommendation, start a green challenge, or ask for your green profile. "
+        return AlexaUtils.build_response(event['session'].get('attributes', {}),
+                                         AlexaUtils.build_speechlet_response("Help", output, None, False))
     if CC.INTENT_GREEN_CHALLENGE == intent_name:
         return GreenChallenge.handle_alexa(event, context) if is_alexa else GreenChallenge.handle_lex(event, context)
     if CC.INTENT_GREEN_PROFILE == intent_name:
