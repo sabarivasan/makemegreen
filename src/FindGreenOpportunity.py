@@ -100,7 +100,7 @@ def handle_alexa(event, context):
             message = "Sorry, we don't have any green tips for you at the moment!"
     else:
         if AlexaUtils.is_slot_present(slots, CC.SLOT_YES_NO):
-            if LexUtils.is_yes(slots[CC.SLOT_YES_NO]['value']):
+            if AlexaUtils.is_yes(slots[CC.SLOT_YES_NO]):
                 user.add_implemented_oppty(session_attrs[CC.SESS_ATTR_CURRENT_OPPORTUNITY_ID],
                                            session_attrs[CC.SESS_ATTR_CURRENT_OPPORTUNITY_NAME])
                 message = "That's great! Thanks for doing your part!"

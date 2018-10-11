@@ -61,3 +61,7 @@ def confirm_intent(session_attributes, intent_name, slots, message, response_car
 
 def is_slot_present(slots, slot):
     return slot in slots and 'value' in slots[slot]
+
+
+def is_yes(val):
+    return "yes" == val['value'].lower() or "true" == val['value'].lower()

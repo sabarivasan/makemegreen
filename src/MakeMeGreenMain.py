@@ -29,7 +29,7 @@ def lambda_handler(event, context):
     if CC.INTENT_GET_POINTS == intent_name:
         return GetPoints.handle(event, context)
     if CC.INTENT_GET_PRODUCT_RECOMMENDATION == intent_name:
-        return GetProductRecommendation.handle(event, context)
+        return GetProductRecommendation.handle_alexa(event, context) if isAlexa else GetProductRecommendation.handle_lex(event, context)
     else:
         raise ValueError("Invalid intent")
 
@@ -46,25 +46,6 @@ def on_launch(event, context):
     should_end_session = False
     return AlexaUtils.build_response(session_attributes, AlexaUtils.build_speechlet_response(
         card_title, speech_output, reprompt_text, should_end_session))
-
-
-#def on_intent(event, context):
-#    """ Called when the user specifies an intent for this skill """
-
-    #intent_name = intent_request['intent']['name']
-
-    # Dispatch to your skill's intent handlers
-    #if intent_name == CC.FIND_GREEN_OPPORTUNITY:
-    #    return FindGreenOpportunity.handle(event, session)
-    #elif intent_name == CC.GET_POINTS:
-    #    return GetPoints.handle(event, session)
-    #elif intent_name == CC.GET_PRODUCT_RECOMMENDATION:
-    #    return GetProductRecommendation.handle(event, session)
-    #else:
-    #    raise ValueError("Invalid intent")
-
-
-
 
 if "__main__" == __name__:
 
