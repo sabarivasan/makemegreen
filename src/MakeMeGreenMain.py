@@ -7,18 +7,84 @@ import GetProductRecommendation
 
 
 def lambda_handler(event, context):
+    if event['request']['type'] == "LaunchRequest":
+        return on_launch(event, context)
+    #elif event['request']['type'] == "IntentRequest":
+    #    return on_intent(event, context)
+    elif event['request']['type'] == "SessionEndedRequest":
+        return #on_session_ended(event, context)
+
     intent_name = event['currentIntent']['name']
 
     print("input event = " + json.dumps(event))
 
     if CC.FIND_GREEN_OPPORTUNITY == intent_name:
         return FindGreenOpportunity.handle(event, context)
-    if CC.GET_POINTS == intent_name:
+    elif CC.GET_POINTS == intent_name:
         return GetPoints.handle(event, context)
-    if CC.GET_PRODUCT_RECOMMENDATION == intent_name:
+    elif CC.GET_PRODUCT_RECOMMENDATION == intent_name:
         return GetProductRecommendation.handle(event, context)
+    else:
+        raise ValueError("Invalid intent")
 
 
+def on_launch(event, context):
+    # Called when the user launches the skill without specifying what they want
+
+    session_attributes = {}
+    card_title = "Welcome"
+    speech_output = "Welcome to Make Me Green. Try asking how you can reduce your envionmental footprint" \
+                    "or say help to hear about all available actions"
+    reprompt_text = "Try asking how you can reduce your envionmental footprint" \
+                    "or say help to hear about all available actions"
+    should_end_session = False
+    return build_response(session_attributes, build_speechlet_response(
+        card_title, speech_output, reprompt_text, should_end_session))
+
+
+#def on_intent(event, context):
+#    """ Called when the user specifies an intent for this skill """
+
+    #intent_name = intent_request['intent']['name']
+
+    # Dispatch to your skill's intent handlers
+    #if intent_name == CC.FIND_GREEN_OPPORTUNITY:
+    #    return FindGreenOpportunity.handle(event, session)
+    #elif intent_name == CC.GET_POINTS:
+    #    return GetPoints.handle(event, session)
+    #elif intent_name == CC.GET_PRODUCT_RECOMMENDATION:
+    #    return GetProductRecommendation.handle(event, session)
+    #else:
+    #    raise ValueError("Invalid intent")
+
+
+def build_speechlet_response(title, output, reprompt_text, should_end_session):
+    return {
+        'outputSpeech': {
+            'type': 'PlainText',
+            'text': output
+        },
+        'card': {
+            'type': 'Simple',
+            'title': title,
+            'content': output
+        },
+        'reprompt': {
+            'outputSpeech': {
+                'type': 'PlainText',
+                'text': reprompt_text
+            }
+        },
+        'shouldEndSession': should_end_session
+    }
+
+
+def build_response(session_attributes, speechlet_response):
+    return {
+        'version': '1.0',
+        'sessionAttributes': session_attributes,
+        'response': speechlet_response
+    }
 
 if "__main__" == __name__:
 
