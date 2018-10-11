@@ -205,7 +205,11 @@ def handle_alexa(event, context):
             user = User.User(id, id_type)
             session_attrs[CC.SESS_ATTR_USER_ID] = id
             session_attrs[CC.SESS_ATTR_USER_ID_TYPE] = id_type
-        oppty_loader = GreenOpportunityFinder(opportunity_type, user)
+
+        # Tag: home or work
+        tag = slots[CC.SLOT_HOME_OR_WORK] if LexUtils.is_slot_present(slots, CC.SLOT_HOME_OR_WORK) else None
+
+        oppty_loader = GreenOpportunityFinder(opportunity_type, user, tag)
         oppty = oppty_loader.find_opportunity()
 
         if oppty:
