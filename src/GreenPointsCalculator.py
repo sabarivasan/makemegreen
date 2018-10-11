@@ -23,7 +23,10 @@ class GreenPointsCalculator:
         for io in implemented:
             num_implemented += 1
             oppty = GreenOpportunity.Opportunity(io[GreenOpportunity.COL_ID])
+            if io[User.COL_FROM] < start:
+                num_seconds = (now - start)
+            else:
+                num_seconds = now - io[User.COL_FROM]
+            tot_points += oppty.get_person_points_per_week() * num_seconds / SECONDS_PER_DAY / DAYS_PER_WEEK
 
-            num_days = (now - io[User.COL_FROM]) / SECONDS_PER_DAY
-            tot_points += oppty.get_person_points_per_week() * num_days / DAYS_PER_WEEK
         return (num_implemented, int(tot_points))

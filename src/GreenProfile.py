@@ -8,10 +8,12 @@ What is my green profile?
 
 
 """
+import time
+
 import LexUtils
 import Constants as CC
 import User
-from GreenPointsCalculator import GreenPointsCalculator
+import GreenPointsCalculator
 
 def handle_lex(event, context):
     intent_name = event['currentIntent']['name']
@@ -59,9 +61,17 @@ def handle_lex(event, context):
     user = User.User(id, id_type)
     session_attrs[CC.SESS_ATTR_USER_ID] = id
     session_attrs[CC.SESS_ATTR_USER_ID_TYPE] = id_type
-    calculator = GreenPointsCalculator(user)
-    (num_implemented, points) = calculator.calculate_points(0)
-    message = "You have implemented {} opportunities and have {} points!!".format(num_implemented, points)
+    calculator = GreenPointsCalculator.GreenPointsCalculator(user)
+
+    if LexUtils.is_slot_present(slots, CC.SLOT_START):
+        start = int(slots[CC.SLOT_START])
+        start_msg = "since " + slots[CC.SLOT_START]
+    else:
+        start = time.time() - 30 * GreenPointsCalculator.SECONDS_PER_DAY
+        start_msg = "during the last month"
+
+    (num_implemented, points) = calculator.calculate_points(start)
+    message = "You have implemented {} opportunities and have {} points {}!!".format(num_implemented, points, start_msg)
     return LexUtils.close(CC.EMPTY_OBJ, True, message, CC.EMPTY_OBJ)
 
 
