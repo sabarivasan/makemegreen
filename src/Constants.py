@@ -5,6 +5,7 @@ EMPTY_OBJ = {}
 INTENT_FIND_GREEN_OPPORTUNITY = "FindGreenOpportunity"
 INTENT_GET_POINTS = "GetPoints"
 INTENT_GET_PRODUCT_RECOMMENDATION = "GetProductRecommendation"
+INTENT_GREEN_CHALLENGE = "GreenChallenge"
 
 # Slots
 
