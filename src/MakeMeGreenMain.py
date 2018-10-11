@@ -31,6 +31,8 @@ def lambda_handler(event, context):
         return GetPoints.handle_alexa(event, context) if is_alexa else GetPoints.handle_lex(event, context)
     if CC.INTENT_GET_PRODUCT_RECOMMENDATION == intent_name:
         return GetProductRecommendation.handle_alexa(event, context) if is_alexa else GetProductRecommendation.handle_lex(event, context)
+    if CC.INTENT_GET_POSSIBLE_ACTIONS == intent_name and is_alexa:
+        return AlexaUtils.delegate(event['session'].get('attributes', {}), intent_name, {})
     if CC.INTENT_GREEN_CHALLENGE == intent_name:
         return GreenChallenge.handle_alexa(event, context) if is_alexa else GreenChallenge.handle_lex(event, context)
     else:
