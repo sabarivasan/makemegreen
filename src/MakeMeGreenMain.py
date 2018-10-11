@@ -3,25 +3,58 @@ import json
 import Constants as CC
 import FindGreenOpportunity
 import GetPoints
+import GetProductRecommendation
+import AlexaUtils
 
 
 def lambda_handler(event, context):
-    intent_name = event['currentIntent']['name']
+    # Check if Alexa request
+    if 'request' in event:
+        is_alexa = True
+        if event['request']['type'] == "LaunchRequest":
+            return on_launch(event, context)
+        elif event['request']['type'] == "SessionEndedRequest":
+            return #on_session_ended(event, context)
+        elif event['request']['type'] == "IntentRequest":
+            intent = event['request']['intent']
+    else:
+        is_alexa = False
+        intent = event['currentIntent']
 
+    intent_name = intent['name']
     print("input event = " + json.dumps(event))
 
-    if CC.FIND_GREEN_OPPORTUNITY == intent_name:
-        return FindGreenOpportunity.handle(event, context)
-    if CC.GET_POINTS == intent_name:
+    if CC.INTENT_FIND_GREEN_OPPORTUNITY == intent_name:
+        return FindGreenOpportunity.handle_alexa(event, context) if is_alexa else FindGreenOpportunity.handle_lex(event, context)
+    if CC.INTENT_GET_POINTS == intent_name:
         return GetPoints.handle(event, context)
+    if CC.INTENT_GET_PRODUCT_RECOMMENDATION == intent_name:
+        return GetProductRecommendation.handle_alexa(event, context) if is_alexa else GetProductRecommendation.handle_lex(event, context)
+    else:
+        raise ValueError("Invalid intent")
 
+
+def on_launch(event, context):
+    # Called when the user launches the skill without specifying what they want
+
+    session_attributes = {}
+    card_title = "Welcome"
+    speech_output = "Welcome to Make Me Green. Try asking how you can reduce your envionmental footprint" \
+                    "or say help to hear about all available actions"
+    reprompt_text = "Try asking how you can reduce your envionmental footprint" \
+                    "or say help to hear about all available actions"
+    should_end_session = False
+    return AlexaUtils.build_response(session_attributes, AlexaUtils.build_speechlet_response(
+        card_title, speech_output, reprompt_text, should_end_session))
 
 if "__main__" == __name__:
 
     # FIND_GREEN_OPPORTUNITY
     event = {
+        "outputDialogMode": "Text",
+        "userId": "72njs51uuv71jj9hggb9mvzvwpzn21ng",
         "currentIntent": {
-            "name": CC.FIND_GREEN_OPPORTUNITY,
+            "name": CC.INTENT_FIND_GREEN_OPPORTUNITY,
             "slots": {
                 "opportunityType": "water",
                 "emailAddress": "sabari2@cvent.com"
@@ -29,39 +62,69 @@ if "__main__" == __name__:
         },
         "sessionAttributes": {}
     }
-
-#     event = {
-#     "messageVersion": "1.0",
-#     "invocationSource": "DialogCodeHook",
-#     "userId": "72njs51uuv71jj9hggb9mvzvwpzn21ng",
-#     "sessionAttributes": {
-#         "CurrentOpptyId": "8",
-#         "opportunityType": "Water",
-#         "emailAddress": "abc@def.com",
-#         "State": "AwaitingOpportunityConfirmation",
-#         "UserId": "abc@def.com"
-#     },
-#     "bot": {
-#         "name": "MakeMeGreen",
-#         "alias": "$LATEST",
-#         "version": "$LATEST"
-#     },
-#     "outputDialogMode": "Text",
-#     "currentIntent": {
-#         "name": "FindGreenOpportunity",
-#         "slots": {
-#             "opportunityType": "Water",
-#             "yesNo": "no",
-#             "emailAddress": "abc@def.com",
-#             "phoneNumber": None,
-#             "opportunityTask": None,
-#             "lookupType": None
-#         },
-#         "confirmationStatus": "None"
-#     },
-#     "inputTranscript": "yes"
-# }
-
+    
+    
+    event = {
+    "messageVersion": "1.0",
+    "invocationSource": "DialogCodeHook",
+    "userId": "ea4b1552-45f0-4fe1-ab45-b3a9b0e46485:TDAGGP9DH:UDAE42BA4",
+    "sessionAttributes": {},
+    "requestAttributes": {
+        "x-amz-lex:channel-id": "ea4b1552-45f0-4fe1-ab45-b3a9b0e46485",
+        "x-amz-lex:webhook-endpoint-url": "https://channels.lex.us-east-1.amazonaws.com/slack/webhook/ea4b1552-45f0-4fe1-ab45-b3a9b0e46485",
+        "x-amz-lex:accept-content-types": "PlainText",
+        "x-amz-lex:user-id": "452560791459.454526013046",
+        "x-amz-lex:slack-team-id": "TDAGGP9DH",
+        "x-amz-lex:slack-bot-token": "xoxb-452560791459-453003707012-7AZT1oG1DlRqmIhaPIlR2L8Y",
+        "x-amz-lex:channel-name": "BotSlackIntegration",
+        "x-amz-lex:channel-type": "Slack"
+    },
+    "bot": {
+        "name": "MakeMeGreen",
+        "alias": "verA",
+        "version": "9"
+    },
+    "outputDialogMode": "Text",
+    "currentIntent": {
+        "name": "FindGreenOpportunity",
+        "slots": {
+            "opportunityType": "plastic",
+            "phone": None,
+            "yesNoGreenOpportunity": None,
+            "emailOrPhone": None,
+            "yesNoIdentifyingInfoWillingness": None
+        },
+        "slotDetails": {
+            "opportunityType": {
+                "resolutions": [
+                    {
+                        "value": "plastic"
+                    }
+                ],
+                "originalValue": "plastic"
+            },
+            "phone": {
+                "resolutions": [],
+                "originalValue": None
+            },
+            "yesNoGreenOpportunity": {
+                "resolutions": [],
+                "originalValue": None
+            },
+            "emailOrPhone": {
+                "resolutions": [],
+                "originalValue": None
+            },
+            "yesNoIdentifyingInfoWillingness": {
+                "resolutions": [],
+                "originalValue": None
+            }
+        },
+        "confirmationStatus": "None"
+    },
+    "inputTranscript": "plastic"
+}
+ 
     print(json.dumps(lambda_handler(event, None)))
 
 # Response

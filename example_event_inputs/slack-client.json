@@ -1,0 +1,61 @@
+{
+    "messageVersion": "1.0",
+    "invocationSource": "DialogCodeHook",
+    "userId": "CHANNEL-ID:TEAM-ID:SLACK-USER-ID",
+    "sessionAttributes": null,
+    "requestAttributes": {
+        "x-amz-lex:channel-id": "CHANNEL-ID",
+        "x-amz-lex:webhook-endpoint-url": "https://channels.lex.us-east-1.amazonaws.com/slack/webhook/CHANNEL-ID",
+        "x-amz-lex:accept-content-types": "PlainText",
+        "x-amz-lex:user-id": "123456789101.12345678910",
+        "x-amz-lex:slack-team-id": "TEAM-ID",
+        "x-amz-lex:slack-bot-token": "xoxb-blahblah-blahblah-blahblah",
+        "x-amz-lex:channel-name": "BotSlackIntegration",
+        "x-amz-lex:channel-type": "Slack"
+    },
+    "bot": {
+        "name": "MakeMeGreen",
+        "alias": "verA",
+        "version": "7"
+    },
+    "outputDialogMode": "Text",
+    "currentIntent": {
+        "name": "FindGreenOpportunity",
+        "slots": {
+            "opportunityType": null,
+            "yesNo": null,
+            "emailAddress": null,
+            "phoneNumber": null,
+            "opportunityTask": null,
+            "lookupType": null
+        },
+        "slotDetails": {
+            "opportunityType": {
+                "resolutions": [],
+                "originalValue": null
+            },
+            "yesNo": {
+                "resolutions": [],
+                "originalValue": null
+            },
+            "emailAddress": {
+                "resolutions": [],
+                "originalValue": null
+            },
+            "phoneNumber": {
+                "resolutions": [],
+                "originalValue": null
+            },
+            "opportunityTask": {
+                "resolutions": [],
+                "originalValue": null
+            },
+            "lookupType": {
+                "resolutions": [],
+                "originalValue": null
+            }
+        },
+        "confirmationStatus": "None"
+    },
+    "inputTranscript": "make me green"
+}
