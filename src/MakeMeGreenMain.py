@@ -28,7 +28,7 @@ def lambda_handler(event, context):
     if CC.INTENT_FIND_GREEN_OPPORTUNITY == intent_name:
         return FindGreenOpportunity.handle_alexa(event, context) if is_alexa else FindGreenOpportunity.handle_lex(event, context)
     if CC.INTENT_GET_POINTS == intent_name:
-        return GetPoints.handle(event, context)
+        return GetPoints.handle_alexa(event, context) if is_alexa else GetPoints.handle_lex(event, context)
     if CC.INTENT_GET_PRODUCT_RECOMMENDATION == intent_name:
         return GetProductRecommendation.handle_alexa(event, context) if is_alexa else GetProductRecommendation.handle_lex(event, context)
     if CC.INTENT_GREEN_CHALLENGE == intent_name:
@@ -50,8 +50,8 @@ def on_launch(event, context):
     return AlexaUtils.build_response(session_attributes, AlexaUtils.build_speechlet_response(
         card_title, speech_output, reprompt_text, should_end_session))
 
-if "__main__" == __name__:
 
+if "__main__" == __name__:
     # FIND_GREEN_OPPORTUNITY
     event = {
         "outputDialogMode": "Text",
@@ -66,60 +66,59 @@ if "__main__" == __name__:
         },
         "sessionAttributes": {}
     }
-    
-    
-    event =  {
-    "messageVersion": "1.0",
-    "invocationSource": "DialogCodeHook",
-    "userId": "bytop04wev717a38tyrzhbj45k5flk2i",
-    "sessionAttributes": {},
-    "requestAttributes": None,
-    "bot": {
-        "name": "MakeMeGreen",
-        "alias": "$LATEST",
-        "version": "$LATEST"
-    },
-    "outputDialogMode": "Text",
-    "currentIntent": {
-        "name": "FindGreenOpportunity",
-        "slots": {
-            "opportunityType": None,
-            "homeOrWork": None,
-            "phone": None,
-            "yesNoGreenOpportunity": None,
-            "emailOrPhone": None,
-            "yesNoIdentifyingInfoWillingness": None
+
+    event = {
+        "messageVersion": "1.0",
+        "invocationSource": "DialogCodeHook",
+        "userId": "bytop04wev717a38tyrzhbj45k5flk2i",
+        "sessionAttributes": {},
+        "requestAttributes": None,
+        "bot": {
+            "name": "MakeMeGreen",
+            "alias": "$LATEST",
+            "version": "$LATEST"
         },
-        "slotDetails": {
-            "opportunityType": {
-                "resolutions": [],
-                "originalValue": None
+        "outputDialogMode": "Text",
+        "currentIntent": {
+            "name": "FindGreenOpportunity",
+            "slots": {
+                "opportunityType": None,
+                "homeOrWork": None,
+                "phone": None,
+                "yesNoGreenOpportunity": None,
+                "emailOrPhone": None,
+                "yesNoIdentifyingInfoWillingness": None
             },
-            "homeOrWork": {
-                "resolutions": [],
-                "originalValue": None
+            "slotDetails": {
+                "opportunityType": {
+                    "resolutions": [],
+                    "originalValue": None
+                },
+                "homeOrWork": {
+                    "resolutions": [],
+                    "originalValue": None
+                },
+                "phone": {
+                    "resolutions": [],
+                    "originalValue": None
+                },
+                "yesNoGreenOpportunity": {
+                    "resolutions": [],
+                    "originalValue": None
+                },
+                "emailOrPhone": {
+                    "resolutions": [],
+                    "originalValue": None
+                },
+                "yesNoIdentifyingInfoWillingness": {
+                    "resolutions": [],
+                    "originalValue": None
+                }
             },
-            "phone": {
-                "resolutions": [],
-                "originalValue": None
-            },
-            "yesNoGreenOpportunity": {
-                "resolutions": [],
-                "originalValue": None
-            },
-            "emailOrPhone": {
-                "resolutions": [],
-                "originalValue": None
-            },
-            "yesNoIdentifyingInfoWillingness": {
-                "resolutions": [],
-                "originalValue": None
-            }
+            "confirmationStatus": "None"
         },
-        "confirmationStatus": "None"
-    },
-    "inputTranscript": "make me green"
-}
+        "inputTranscript": "make me green"
+    }
 
     print(json.dumps(lambda_handler(event, None)))
 
