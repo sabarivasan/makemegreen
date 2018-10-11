@@ -4,21 +4,48 @@ import Constants as CC
 import FindGreenOpportunity
 import GetPoints
 import GetProductRecommendation
+import AlexaUtils
 
 
 def lambda_handler(event, context):
-    intent_name = event['currentIntent']['name']
+    # Check if Alexa request
+    if 'request' in event:
+        is_alexa = True
+        if event['request']['type'] == "LaunchRequest":
+            return on_launch(event, context)
+        elif event['request']['type'] == "SessionEndedRequest":
+            return #on_session_ended(event, context)
+        elif event['request']['type'] == "IntentRequest":
+            intent = event['request']['intent']
+    else:
+        is_alexa = False
+        intent = event['currentIntent']
 
+    intent_name = intent['name']
     print("input event = " + json.dumps(event))
 
     if CC.INTENT_FIND_GREEN_OPPORTUNITY == intent_name:
-        return FindGreenOpportunity.handle(event, context)
+        return FindGreenOpportunity.handle_alexa(event, context) if is_alexa else FindGreenOpportunity.handle_lex(event, context)
     if CC.INTENT_GET_POINTS == intent_name:
         return GetPoints.handle(event, context)
     if CC.INTENT_GET_PRODUCT_RECOMMENDATION == intent_name:
-        return GetProductRecommendation.handle(event, context)
+        return GetProductRecommendation.handle_alexa(event, context) if is_alexa else GetProductRecommendation.handle_lex(event, context)
+    else:
+        raise ValueError("Invalid intent")
 
 
+def on_launch(event, context):
+    # Called when the user launches the skill without specifying what they want
+
+    session_attributes = {}
+    card_title = "Welcome"
+    speech_output = "Welcome to Make Me Green. Try asking how you can reduce your envionmental footprint" \
+                    "or say help to hear about all available actions"
+    reprompt_text = "Try asking how you can reduce your envionmental footprint" \
+                    "or say help to hear about all available actions"
+    should_end_session = False
+    return AlexaUtils.build_response(session_attributes, AlexaUtils.build_speechlet_response(
+        card_title, speech_output, reprompt_text, should_end_session))
 
 if "__main__" == __name__:
 
