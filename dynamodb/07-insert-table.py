@@ -1,6 +1,7 @@
 from __future__ import print_function # Python 2/3 compatibility
 import boto3
 import json
+import sys
 
 session = boto3.session.Session(profile_name='cvent-sandbox')
 dynamodb = session.resource('dynamodb', region_name='us-east-1')
