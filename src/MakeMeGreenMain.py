@@ -29,9 +29,11 @@ def lambda_handler(event, context):
     if CC.INTENT_FIND_GREEN_OPPORTUNITY == intent_name:
         return FindGreenOpportunity.handle_alexa(event, context) if is_alexa else FindGreenOpportunity.handle_lex(event, context)
     if CC.INTENT_GET_POINTS == intent_name:
-        return GetPoints.handle(event, context)
+        return GetPoints.handle_alexa(event, context) if is_alexa else GetPoints.handle_lex(event, context)
     if CC.INTENT_GET_PRODUCT_RECOMMENDATION == intent_name:
         return GetProductRecommendation.handle_alexa(event, context) if is_alexa else GetProductRecommendation.handle_lex(event, context)
+    if CC.INTENT_GET_POSSIBLE_ACTIONS == intent_name and is_alexa:
+        return AlexaUtils.delegate(event['session'].get('attributes', {}), intent_name, {})
     if CC.INTENT_GREEN_CHALLENGE == intent_name:
         return GreenChallenge.handle_alexa(event, context) if is_alexa else GreenChallenge.handle_lex(event, context)
     if CC.INTENT_GREEN_PROFILE == intent_name:
@@ -53,8 +55,8 @@ def on_launch(event, context):
     return AlexaUtils.build_response(session_attributes, AlexaUtils.build_speechlet_response(
         card_title, speech_output, reprompt_text, should_end_session))
 
-if "__main__" == __name__:
 
+if "__main__" == __name__:
     # FIND_GREEN_OPPORTUNITY
     event = {
         "outputDialogMode": "Text",
@@ -68,50 +70,7 @@ if "__main__" == __name__:
             }
         },
         "sessionAttributes": {}
-    };
-
-    
-    event =  {
-    "messageVersion": "1.0",
-    "invocationSource": "DialogCodeHook",
-    "userId": "ea4b1552-45f0-4fe1-ab45-b3a9b0e46485:TDAGGP9DH:UDAE42BA4",
-    "sessionAttributes": None,
-    "requestAttributes": {
-        "x-amz-lex:channel-id": "ea4b1552-45f0-4fe1-ab45-b3a9b0e46485",
-        "x-amz-lex:webhook-endpoint-url": "https://channels.lex.us-east-1.amazonaws.com/slack/webhook/ea4b1552-45f0-4fe1-ab45-b3a9b0e46485",
-        "x-amz-lex:accept-content-types": "PlainText",
-        "x-amz-lex:user-id": "452560791459.454526013046",
-        "x-amz-lex:slack-team-id": "TDAGGP9DH",
-        "x-amz-lex:slack-bot-token": "xoxb-452560791459-453003707012-7AZT1oG1DlRqmIhaPIlR2L8Y",
-        "x-amz-lex:channel-name": "BotSlackIntegration",
-        "x-amz-lex:channel-type": "Slack"
-    },
-    "bot": {
-        "name": "MakeMeGreen",
-        "alias": "verA",
-        "version": "13"
-    },
-    "outputDialogMode": "Text",
-    "currentIntent": {
-        "name": "GreenProfile",
-        "slots": {
-            "phone": None,
-            "emailOrPhone": None
-        },
-        "slotDetails": {
-            "phone": {
-                "resolutions": [],
-                "originalValue": None
-            },
-            "emailOrPhone": {
-                "resolutions": [],
-                "originalValue": None
-            }
-        },
-        "confirmationStatus": "None"
-    },
-    "inputTranscript": "what is my green profile"
-}
+    }
 
     print(json.dumps(lambda_handler(event, None)))
 
