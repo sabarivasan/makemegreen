@@ -4,22 +4,28 @@ import Constants as CC
 import FindGreenOpportunity
 import GetPoints
 import GetProductRecommendation
+import AlexaUtils
 
 
 def lambda_handler(event, context):
-    if event['request']['type'] == "LaunchRequest":
-        return on_launch(event, context)
-    #elif event['request']['type'] == "IntentRequest":
-    #    return on_intent(event, context)
-    elif event['request']['type'] == "SessionEndedRequest":
-        return #on_session_ended(event, context)
+    # Check if Alexa request
+    if 'request' in event:
+        isAlexa = True
+        if event['request']['type'] == "LaunchRequest":
+            return on_launch(event, context)
+        elif event['request']['type'] == "SessionEndedRequest":
+            return #on_session_ended(event, context)
+        elif event['request']['type'] == "IntentRequest":
+            intent = event['request']['intent']
+    else:
+        isAlexa = False
+        intent = event['currentIntent']
 
-    intent_name = event['currentIntent']['name']
-
+    intent_name = intent['name']
     print("input event = " + json.dumps(event))
 
     if CC.INTENT_FIND_GREEN_OPPORTUNITY == intent_name:
-        return FindGreenOpportunity.handle(event, context)
+        return FindGreenOpportunity.handle_alexa(event, context) if isAlexa else FindGreenOpportunity.handle_lex(event, context)
     if CC.INTENT_GET_POINTS == intent_name:
         return GetPoints.handle(event, context)
     if CC.INTENT_GET_PRODUCT_RECOMMENDATION == intent_name:
@@ -38,7 +44,7 @@ def on_launch(event, context):
     reprompt_text = "Try asking how you can reduce your envionmental footprint" \
                     "or say help to hear about all available actions"
     should_end_session = False
-    return build_response(session_attributes, build_speechlet_response(
+    return AlexaUtils.build_response(session_attributes, AlexaUtils.build_speechlet_response(
         card_title, speech_output, reprompt_text, should_end_session))
 
 
@@ -58,33 +64,7 @@ def on_launch(event, context):
     #    raise ValueError("Invalid intent")
 
 
-def build_speechlet_response(title, output, reprompt_text, should_end_session):
-    return {
-        'outputSpeech': {
-            'type': 'PlainText',
-            'text': output
-        },
-        'card': {
-            'type': 'Simple',
-            'title': title,
-            'content': output
-        },
-        'reprompt': {
-            'outputSpeech': {
-                'type': 'PlainText',
-                'text': reprompt_text
-            }
-        },
-        'shouldEndSession': should_end_session
-    }
 
-
-def build_response(session_attributes, speechlet_response):
-    return {
-        'version': '1.0',
-        'sessionAttributes': session_attributes,
-        'response': speechlet_response
-    }
 
 if "__main__" == __name__:
 
