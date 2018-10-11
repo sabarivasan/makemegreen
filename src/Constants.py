@@ -9,6 +9,7 @@ INTENT_GET_PRODUCT_RECOMMENDATION = "GetProductRecommendation"
 # Slots
 SLOT_OPPORTUNITY_TYPE = "opportunityType"
 SLOT_POINTS_TIME_PERIOD = "pointsTimePeriod"
+SLOT_HOME_OR_WORK = "homeOrWork"
 SLOT_PHONE = "phone"
 SLOT_EMAIL_ADDRESS = "emailAddress"
 SLOT_EMAIL_OR_PHONE = "emailOrPhone"
@@ -34,6 +35,7 @@ SESS_ATTR_USER_ID_TYPE = 'userIdType'
 SESS_ATTR_ANONYMOUS = 'anonymous'
 SESS_ATTR_CURRENT_OPPORTUNITY_ID = 'CurrentOpptyId'
 SESS_ATTR_CURRENT_OPPORTUNITY_NAME = 'CurrentOpptyName'
+SESS_ATTR_OPPORTUNITY_TAG = "opportunityTag"
 
 # State of a conversation
 SESS_ATTR_STATE = 'State'
