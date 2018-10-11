@@ -46,6 +46,26 @@ def elicit_slot(session_attributes, intent_name, slots, slot_to_elicit, title, m
     return build_response(session_attributes, build_speechlet_response(title, message, message, False, directives))
 
 
+def delegate(session_attributes, intent_name, slots):
+    directives = [
+        {
+            "type": "Dialog.Delegate",
+            "updatedIntent": {
+                "name": intent_name,
+                "confirmationStatus": "NONE",
+                "slots": slots
+            }
+        }
+    ]
+
+    response = {
+        'shouldEndSession': False,
+        'directives': directives
+    }
+
+    return build_response(session_attributes, response)
+
+
 def confirm_intent(session_attributes, intent_name, slots, message, response_card):
     return {
         'sessionAttributes': session_attributes,

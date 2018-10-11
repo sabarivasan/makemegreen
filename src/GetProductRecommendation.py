@@ -14,8 +14,15 @@ def handle_lex(event, content):
     message = "The following products are recommended: " + ''.join(map(lambda p: "\n {}".format(p), products))
     return LexUtils.close(CC.EMPTY_OBJ, True, message, CC.EMPTY_OBJ)
 
+
 def handle_alexa(event, content):
+    intent_name = event['request']['intent']['name']
     slots = event['request']['intent']['slots']
+    session_attrs = event['session'].get('attributes', {})
+
+    if event['request']['dialogState'] == 'STARTED':
+        return AlexaUtils.delegate(session_attrs, intent_name, slots)
+
     product_type = slots[CC.SLOT_PRODUCT_TYPE]['value']
 
     loader = GreenProductLoader.GreenProductLoader()

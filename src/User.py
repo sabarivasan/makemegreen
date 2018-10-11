@@ -1,44 +1,40 @@
-import decimal
+"""
+See FindGreenOpportunity for documentation on levels of personalization we provide in conversations
+"""
 import time
 
-import boto3
 from botocore.exceptions import ClientError
 
-import LambdaEnviron
 import json
 import DynamoDB
 import LexUtils
+from DynamoDB import DecimalEncoder
+
+# ID_TYPES
+ID_TYPE_SLACK = 'Slack'
+ID_TYPE_PHONE = 'Phone'
+ID_TYPE_EMAIL = 'Email'
 
 # COLUMNS
-COL_EMAIL_ADDRESS = 'email_address'
+COL_ID='id'
+COL_ID_TYPE='id_type'   #Slack|Phone|Email
 COL_IMPLEMENTED_OPPORTUNITIES = 'implemented_opportunities'
 COL_REFUSED_OPPORTUNITIES = 'refused_opportunities'
 
-# Helper class to convert a DynamoDB item to JSON.
-class DecimalEncoder(json.JSONEncoder):
-    def default(self, o):
-        if isinstance(o, decimal.Decimal):
-            if o % 1 > 0:
-                return float(o)
-            else:
-                return int(o)
-        return super(DecimalEncoder, self).default(o)
-
-
 class User:
 
-    def __init__(self, email_address):
-        email_address = LexUtils.cleanse_email(email_address)
-        self.email_address = email_address
+    def __init__(self, id, id_type):
+        if ID_TYPE_EMAIL == id_type:
+            id = LexUtils.cleanse_email(id)
+        self.id = id
+        self.id_type = id_type
         self.dynamo_client = DynamoDB.create_client()
         self.user_table = self.dynamo_client.Table(DynamoDB.USERS_TABLE)
         self.upsert_user()
 
     def load_from_db(self):
         try:
-            response = self.user_table.get_item(Key={
-                COL_EMAIL_ADDRESS: self.email_address
-            })
+            response = self.user_table.get_item(Key=self.primary_key())
         except ClientError as e:
             print("Error reading user" + e.response['Error']['Message'])
             return False
@@ -49,13 +45,18 @@ class User:
                 print(json.dumps(self.user, indent=4, cls=DecimalEncoder))
                 return True
             else:
-                print("No user with email address " + self.email_address)
+                print("No user with (id, id_type) = ({}, {})".format(self.id, self.id_type))
                 return False
 
+    def primary_key(self):
+        return {
+            COL_ID: self.id,
+            COL_ID_TYPE: self.id_type
+        }
 
     def upsert_user(self):
         if not self.load_from_db():
-            self.user = {COL_EMAIL_ADDRESS: self.email_address,
+            self.user = {COL_ID: self.id, COL_ID_TYPE: self.id_type,
                          COL_IMPLEMENTED_OPPORTUNITIES: [],
                          COL_REFUSED_OPPORTUNITIES: []}
             self.user_table.put_item(Item=self.user)
@@ -81,9 +82,7 @@ class User:
         self.add_field_to_arr(refused_oppty, COL_REFUSED_OPPORTUNITIES)
 
     def add_field_to_arr(self, oppty, field_name):
-        response = self.user_table.update_item(Key={
-                COL_EMAIL_ADDRESS: self.email_address
-            },
+        response = self.user_table.update_item(Key=self.primary_key(),
             UpdateExpression="SET {0} = list_append({0}, :o)".format(field_name),
             ExpressionAttributeValues={
                 ':o': [oppty],
@@ -94,3 +93,4 @@ class User:
 
 
 
+# Helper class to convert a DynamoDB item to JSON.
