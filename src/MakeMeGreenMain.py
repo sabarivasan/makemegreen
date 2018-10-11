@@ -18,11 +18,11 @@ def lambda_handler(event, context):
 
     print("input event = " + json.dumps(event))
 
-    if CC.FIND_GREEN_OPPORTUNITY == intent_name:
+    if CC.INTENT_FIND_GREEN_OPPORTUNITY == intent_name:
         return FindGreenOpportunity.handle(event, context)
-    elif CC.GET_POINTS == intent_name:
+    if CC.INTENT_GET_POINTS == intent_name:
         return GetPoints.handle(event, context)
-    elif CC.GET_PRODUCT_RECOMMENDATION == intent_name:
+    if CC.INTENT_GET_PRODUCT_RECOMMENDATION == intent_name:
         return GetProductRecommendation.handle(event, context)
     else:
         raise ValueError("Invalid intent")
@@ -91,7 +91,7 @@ if "__main__" == __name__:
     # FIND_GREEN_OPPORTUNITY
     event = {
         "currentIntent": {
-            "name": CC.FIND_GREEN_OPPORTUNITY,
+            "name": CC.INTENT_FIND_GREEN_OPPORTUNITY,
             "slots": {
                 "opportunityType": "water",
                 "emailAddress": "sabari2@cvent.com"
