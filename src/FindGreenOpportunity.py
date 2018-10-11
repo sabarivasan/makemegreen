@@ -30,8 +30,8 @@ from GreenOpportunityLoader import GreenOpportunityFinder
 def handle_lex(event, context):
     intent_name = event['currentIntent']['name']
     slots = event['currentIntent']['slots']
-    session_attrs = event['sessionAttributes'] if event['sessionAttributes'] is not None else {}
-    request_attrs = event['requestAttributes'] if event['requestAttributes'] is not None else {}
+    session_attrs = event['sessionAttributes'] if 'sessionAttributes' in event and event['sessionAttributes'] is not None else {}
+    request_attrs = event['requestAttributes'] if 'requestAttributes' in event and event['requestAttributes'] is not None else {}
     userId = event[CC.EVENT_INPUT_USER_ID]
     outputDialogMode = event[CC.EVENT_INPUT_OUTPUT_DIALOG_MODE]
     is_voice = "Voice" == outputDialogMode
@@ -109,7 +109,11 @@ def handle_lex(event, context):
             user = User.User(id, id_type)
             session_attrs[CC.SESS_ATTR_USER_ID] = id
             session_attrs[CC.SESS_ATTR_USER_ID_TYPE] = id_type
-        oppty_loader = GreenOpportunityFinder(opportunity_type, user)
+
+        # Tag: home or work
+        tag = slots[CC.SLOT_HOME_OR_WORK] if LexUtils.is_slot_present(slots, CC.SLOT_HOME_OR_WORK) else None
+
+        oppty_loader = GreenOpportunityFinder(opportunity_type, user, tag)
         oppty = oppty_loader.find_opportunity()
 
         if oppty:

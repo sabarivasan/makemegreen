@@ -57,38 +57,31 @@ if "__main__" == __name__:
             "name": CC.INTENT_FIND_GREEN_OPPORTUNITY,
             "slots": {
                 "opportunityType": "water",
-                "emailAddress": "sabari2@cvent.com"
+                "emailAddress": "sabari2@cvent.com",
+                "homeOrWork": "work"
             }
         },
         "sessionAttributes": {}
     }
     
     
-    event = {
+    event =  {
     "messageVersion": "1.0",
     "invocationSource": "DialogCodeHook",
-    "userId": "ea4b1552-45f0-4fe1-ab45-b3a9b0e46485:TDAGGP9DH:UDAE42BA4",
+    "userId": "bytop04wev717a38tyrzhbj45k5flk2i",
     "sessionAttributes": {},
-    "requestAttributes": {
-        "x-amz-lex:channel-id": "ea4b1552-45f0-4fe1-ab45-b3a9b0e46485",
-        "x-amz-lex:webhook-endpoint-url": "https://channels.lex.us-east-1.amazonaws.com/slack/webhook/ea4b1552-45f0-4fe1-ab45-b3a9b0e46485",
-        "x-amz-lex:accept-content-types": "PlainText",
-        "x-amz-lex:user-id": "452560791459.454526013046",
-        "x-amz-lex:slack-team-id": "TDAGGP9DH",
-        "x-amz-lex:slack-bot-token": "xoxb-452560791459-453003707012-7AZT1oG1DlRqmIhaPIlR2L8Y",
-        "x-amz-lex:channel-name": "BotSlackIntegration",
-        "x-amz-lex:channel-type": "Slack"
-    },
+    "requestAttributes": None,
     "bot": {
         "name": "MakeMeGreen",
-        "alias": "verA",
-        "version": "9"
+        "alias": "$LATEST",
+        "version": "$LATEST"
     },
     "outputDialogMode": "Text",
     "currentIntent": {
         "name": "FindGreenOpportunity",
         "slots": {
-            "opportunityType": "plastic",
+            "opportunityType": None,
+            "homeOrWork": None,
             "phone": None,
             "yesNoGreenOpportunity": None,
             "emailOrPhone": None,
@@ -96,12 +89,12 @@ if "__main__" == __name__:
         },
         "slotDetails": {
             "opportunityType": {
-                "resolutions": [
-                    {
-                        "value": "plastic"
-                    }
-                ],
-                "originalValue": "plastic"
+                "resolutions": [],
+                "originalValue": None
+            },
+            "homeOrWork": {
+                "resolutions": [],
+                "originalValue": None
             },
             "phone": {
                 "resolutions": [],
@@ -122,9 +115,9 @@ if "__main__" == __name__:
         },
         "confirmationStatus": "None"
     },
-    "inputTranscript": "plastic"
+    "inputTranscript": "make me green"
 }
- 
+
     print(json.dumps(lambda_handler(event, None)))
 
 # Response
