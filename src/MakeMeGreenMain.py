@@ -24,6 +24,8 @@ if "__main__" == __name__:
 
     # FIND_GREEN_OPPORTUNITY
     event = {
+        "outputDialogMode": "Text",
+        "userId": "72njs51uuv71jj9hggb9mvzvwpzn21ng",
         "currentIntent": {
             "name": CC.INTENT_FIND_GREEN_OPPORTUNITY,
             "slots": {
@@ -33,39 +35,76 @@ if "__main__" == __name__:
         },
         "sessionAttributes": {}
     }
-
-#     event = {
-#     "messageVersion": "1.0",
-#     "invocationSource": "DialogCodeHook",
-#     "userId": "72njs51uuv71jj9hggb9mvzvwpzn21ng",
-#     "sessionAttributes": {
-#         "CurrentOpptyId": "8",
-#         "opportunityType": "Water",
-#         "emailAddress": "abc@def.com",
-#         "State": "AwaitingOpportunityConfirmation",
-#         "UserId": "abc@def.com"
-#     },
-#     "bot": {
-#         "name": "MakeMeGreen",
-#         "alias": "$LATEST",
-#         "version": "$LATEST"
-#     },
-#     "outputDialogMode": "Text",
-#     "currentIntent": {
-#         "name": "FindGreenOpportunity",
-#         "slots": {
-#             "opportunityType": "Water",
-#             "yesNo": "no",
-#             "emailAddress": "abc@def.com",
-#             "phoneNumber": None,
-#             "opportunityTask": None,
-#             "lookupType": None
-#         },
-#         "confirmationStatus": "None"
-#     },
-#     "inputTranscript": "yes"
-# }
-
+    
+    
+    event = {
+    "messageVersion": "1.0",
+    "invocationSource": "DialogCodeHook",
+    "userId": "w6oya0njyqxijub0gnf0xi3w5o1yiyv1",
+    "sessionAttributes": {
+        "CurrentOpptyId": "8",
+        "opportunityType": "water",
+        "State": "AwaitingOpportunityConfirmation",
+        "userIdType": "Phone",
+        "CurrentOpptyName": "garden",
+        "anonymous": "false",
+        "userId": "5555555555"
+    },
+    "requestAttributes": None,
+    "bot": {
+        "name": "MakeMeGreen",
+        "alias": "$LATEST",
+        "version": "$LATEST"
+    },
+    "outputDialogMode": "Text",
+    "currentIntent": {
+        "name": "FindGreenOpportunity",
+        "slots": {
+            "opportunityType": "water",
+            "phone": None,
+            "yesNoGreenOpportunity": "yes",
+            "emailOrPhone": None,
+            "yesNoIdentifyingInfoWillingness": "yes"
+        },
+        "slotDetails": {
+            "opportunityType": {
+                "resolutions": [
+                    {
+                        "value": "water"
+                    }
+                ],
+                "originalValue": "water"
+            },
+            "phone": {
+                "resolutions": [],
+                "originalValue": None
+            },
+            "yesNoGreenOpportunity": {
+                "resolutions": [
+                    {
+                        "value": "Yes"
+                    }
+                ],
+                "originalValue": "yes"
+            },
+            "emailOrPhone": {
+                "resolutions": [],
+                "originalValue": None
+            },
+            "yesNoIdentifyingInfoWillingness": {
+                "resolutions": [
+                    {
+                        "value": "Yes"
+                    }
+                ],
+                "originalValue": "yes"
+            }
+        },
+        "confirmationStatus": "None"
+    },
+    "inputTranscript": "yes"
+}
+ 
     print(json.dumps(lambda_handler(event, None)))
 
 # Response
