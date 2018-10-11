@@ -1,0 +1,26 @@
+[
+  {
+    "id": "ea4b1552-45f0-4fe1-ab45-b3a9b0e46485:TDAGGP9DH:UDAQS143X",
+    "id_type": "Slack",
+    "name": "Sabari",
+    "groups": {
+        "Cvent" : {
+          "location": "HQ"
+        }
+    },
+    "implemented_opportunities": [],
+    "refused_opportunities": []
+  },
+  {
+    "id": "ea4b1552-45f0-4fe1-ab45-b3a9b0e46485:TDAGGP9DH:UDAE42BA4",
+    "id_type": "Slack",
+    "name": "Jacob Daniels",
+    "groups": {
+        "Cvent" : {
+          "location": "Draper"
+        }
+    },
+    "implemented_opportunities": [],
+    "refused_opportunities": []
+  }
+]

@@ -128,7 +128,6 @@ def handle_alexa(event, context):
     if session_attrs[CC.SESS_ATTR_STATE] != CC.SESS_STATE_AWAITING_OPPORTUNITY_CONF:
         # Store/load the user
         if not LexUtils.is_yes(session_attrs[CC.SESS_ATTR_ANONYMOUS]):
-            print("id:{}, type:{}".format(session_attrs[CC.SESS_ATTR_USER_ID], session_attrs[CC.SESS_ATTR_USER_ID_TYPE]))
             user = User.User(session_attrs[CC.SESS_ATTR_USER_ID], session_attrs[CC.SESS_ATTR_USER_ID_TYPE])
 
         # Tag: home or work
