@@ -43,7 +43,7 @@ class Opportunity:
         }
 
     def get_person_points_per_week(self):
-        return self.get_attr(COL_PERSON_POINTS_PER_WEEK, 0)
+        return int(self.get_attr(COL_PERSON_POINTS_PER_WEEK, 0))
 
 
     def get_attr(self, attr_name, default_val):

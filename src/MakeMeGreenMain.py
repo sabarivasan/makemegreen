@@ -75,6 +75,46 @@ if "__main__" == __name__:
         "sessionAttributes": {}
     }
 
+    event = {
+    "messageVersion": "1.0",
+    "invocationSource": "DialogCodeHook",
+    "userId": "f7tcrbfwiqt4muhzfrg8w8cz2dhj73wp",
+    "sessionAttributes": {
+        "State": "AwaitingIdentifyingInfo"
+    },
+    "requestAttributes": None,
+    "bot": {
+        "name": "MakeMeGreen",
+        "alias": "$LATEST",
+        "version": "$LATEST"
+    },
+    "outputDialogMode": "Text",
+    "currentIntent": {
+        "name": "GreenProfile",
+        "slots": {
+            "phone": None,
+            "emailOrPhone": None,
+            "start": None
+        },
+        "slotDetails": {
+            "phone": {
+                "resolutions": [],
+                "originalValue": None
+            },
+            "emailOrPhone": {
+                "resolutions": [],
+                "originalValue": None
+            },
+            "start": {
+                "resolutions": [],
+                "originalValue": None
+            }
+        },
+        "confirmationStatus": "None"
+    },
+    "inputTranscript": "sabari@g.com"
+}
+
     print(json.dumps(lambda_handler(event, None)))
 
 # Response
