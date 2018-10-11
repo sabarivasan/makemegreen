@@ -2,17 +2,18 @@
 EMPTY_OBJ = {}
 
 # Intents
-FIND_GREEN_OPPORTUNITY = "FindGreenOpportunity"
-GET_POINTS = "GetPoints"
-GET_PRODUCT_RECOMMENDATION = "GetProductRecommendation"
+INTENT_FIND_GREEN_OPPORTUNITY = "FindGreenOpportunity"
+INTENT_GET_POINTS = "GetPoints"
+INTENT_GET_PRODUCT_RECOMMENDATION = "GetProductRecommendation"
 
 # Slots
-OPPORTUNITY_TYPE = "opportunityType"
-POINTS_TIME_PERIOD = "pointsTimePeriod"
-EMAIL_ADDRESS = "emailAddress"
-PRODUCT_TYPE = "productType"
-
-YES_NO = "yesNo"
+SLOT_OPPORTUNITY_TYPE = "opportunityType"
+SLOT_POINTS_TIME_PERIOD = "pointsTimePeriod"
+SLOT_PHONE = "phone"
+SLOT_EMAIL_ADDRESS = "emailAddress"
+SLOT_EMAIL_OR_PHONE = "emailOrPhone"
+SLOT_PRODUCT_TYPE = "productType"
+SLOT_YES_NO = "yesNo"
 
 # Point time periods
 DAILY = "daily"
@@ -26,12 +27,12 @@ REQUEST_ATTRS = "requestAttributes"
 
 # Session Attributes
 # State of the conversation
-STATE = 'State'
-USER_ID = 'UserId'
+SESS_ATTR_STATE = 'State'
+SESS_ATTR_USER_ID = 'UserId'
 
 # Opportunity offered to the user. Awaiting yes/no
-AWAITING_OPPORTUNITY_CONF = 'AwaitingOpportunityConfirmation'
-CURRENT_OPPORTUNITY_ID = 'CurrentOpptyId'
-CURRENT_OPPORTUNITY_NAME = 'CurrentOpptyName'
+SESS_ATTR_AWAITING_OPPORTUNITY_CONF = 'AwaitingOpportunityConfirmation'
+SESS_ATTR_CURRENT_OPPORTUNITY_ID = 'CurrentOpptyId'
+SESS_ATTR_CURRENT_OPPORTUNITY_NAME = 'CurrentOpptyName'
 
 # S

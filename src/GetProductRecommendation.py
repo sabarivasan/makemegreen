@@ -5,7 +5,7 @@ import GreenProductLoader
 
 def handle(event, content):
     slots = event['currentIntent']['slots']
-    product_type = slots[CC.PRODUCT_TYPE]
+    product_type = slots[CC.SLOT_PRODUCT_TYPE]
 
     loader = GreenProductLoader.GreenProductLoader()
     products = loader.load_product_recommendations(product_type)
