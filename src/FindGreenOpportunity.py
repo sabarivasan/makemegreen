@@ -22,6 +22,7 @@ We aim for the following levels of personalization:
 
 import LexUtils
 import AlexaUtils
+import MiscUtils
 import Constants as CC
 import User
 from GreenOpportunityLoader import GreenOpportunityFinder
@@ -31,11 +32,6 @@ def handle_lex(event, context):
     intent_name = event['currentIntent']['name']
     slots = event['currentIntent']['slots']
     session_attrs = event['sessionAttributes'] if event['sessionAttributes'] is not None else {}
-    userId = event[CC.EVENT_INPUT_USER_ID]
-    outputDialogMode = event[CC.EVENT_INPUT_OUTPUT_DIALOG_MODE]
-    is_voice = "Voice" == outputDialogMode
-    is_text = "Text" == outputDialogMode
-    is_slack = CC.USER_ATTR_CHANNEL_TYPE in session_attrs and "Slack" == session_attrs[CC.USER_ATTR_CHANNEL_TYPE]
     user = None
 
     # First, find out what opportunity type they are interested in hearing about
@@ -54,60 +50,15 @@ def handle_lex(event, context):
     opportunity_type = slots[CC.SLOT_OPPORTUNITY_TYPE]
     session_attrs[CC.SLOT_OPPORTUNITY_TYPE] = opportunity_type
 
-    # Next, lets find out if we need identifying info and if user is willing to provide identifying info
-    if CC.SESS_ATTR_STATE not in session_attrs:
-
-        if is_slack:
-            # Slack clients come with user id
-            id_type = User.ID_TYPE_SLACK
-            id = userId
-            session_attrs[CC.SESS_ATTR_STATE] = CC.SESS_STATE_IDENTIFYING_INFO_COMPLETE
-            session_attrs[CC.SESS_ATTR_ANONYMOUS] = False
-        else:
-            # Voice clients mean we ask for phone number alone, not email address which is unreliable over voice
-            info_msg = "phone number" if is_voice else "phone number or email address"
-            message = "Would you be willing to provide your {} so we can lookup your green history and provide personalized service?".format(
-                info_msg)
-            session_attrs[CC.SESS_ATTR_STATE] = CC.SESS_STATE_AWAITING_IDENTIFY_INFO_WILLINGNESS
-            return LexUtils.elicit_slot(session_attrs, intent_name, slots, CC.SLOT_YES_NO_IDENTIFYING_INFO_WILLINGNESS,
-                                        message, None)
-
-    elif session_attrs[CC.SESS_ATTR_STATE] == CC.SESS_STATE_AWAITING_IDENTIFY_INFO_WILLINGNESS:
-
-        if LexUtils.is_yes(slots[CC.SLOT_YES_NO_IDENTIFYING_INFO_WILLINGNESS]):
-            info_msg = "phone number" if is_voice else "phone number or email address"
-            slot = CC.SLOT_PHONE if is_voice else CC.SLOT_EMAIL_OR_PHONE
-            message = "Please provide your {} so we can lookup your green history and provide personalized service".format(
-                info_msg)
-            session_attrs[CC.SESS_ATTR_STATE] = CC.SESS_STATE_AWAITING_IDENTIFY_INFO
-            return LexUtils.elicit_slot(session_attrs, intent_name, slots, slot, message, None)
-        else:
-            session_attrs[CC.SESS_ATTR_STATE] = CC.SESS_STATE_IDENTIFYING_INFO_COMPLETE
-            session_attrs[CC.SESS_ATTR_ANONYMOUS] = True
-
-    elif session_attrs[CC.SESS_ATTR_STATE] == CC.SESS_STATE_AWAITING_IDENTIFY_INFO:
-        session_attrs[CC.SESS_ATTR_STATE] = CC.SESS_STATE_IDENTIFYING_INFO_COMPLETE
-        slot = CC.SLOT_PHONE if is_voice else CC.SLOT_EMAIL_OR_PHONE
-        id = slots[slot] if LexUtils.is_slot_present(slots, slot) else event[CC.EVENT_INPUT_TRANSCRIPT]
-        if len(id.strip()) > 0:
-            if is_voice:
-                id_type = User.ID_TYPE_PHONE
-            elif LexUtils.looks_like_phone_number(id):
-                id_type = User.ID_TYPE_PHONE
-            else:
-                id_type = User.ID_TYPE_EMAIL
-            session_attrs[CC.SESS_ATTR_ANONYMOUS] = False
-        else:
-            session_attrs[CC.SESS_ATTR_STATE] = CC.SESS_STATE_IDENTIFYING_INFO_COMPLETE
-            session_attrs[CC.SESS_ATTR_ANONYMOUS] = True
+    set_user_response = MiscUtils.set_session_user_id_and_type(event, False)
+    if set_user_response is not None:
+        return set_user_response
 
     # TODO: It would be natural if this if clause were part of the previous if clauses
     if session_attrs[CC.SESS_ATTR_STATE] != CC.SESS_STATE_AWAITING_OPPORTUNITY_CONF:
         # Store/load the user
         if not LexUtils.is_yes(session_attrs[CC.SESS_ATTR_ANONYMOUS]):
-            user = User.User(id, id_type)
-            session_attrs[CC.SESS_ATTR_USER_ID] = id
-            session_attrs[CC.SESS_ATTR_USER_ID_TYPE] = id_type
+            user = User.User(session_attrs[CC.SESS_ATTR_USER_ID], session_attrs[CC.SESS_ATTR_USER_ID_TYPE])
         oppty_loader = GreenOpportunityFinder(opportunity_type, user)
         oppty = oppty_loader.find_opportunity()
 
@@ -133,21 +84,18 @@ def handle_lex(event, context):
             else:
                 if user:
                     user.add_refused_oppty(session_attrs[CC.SESS_ATTR_CURRENT_OPPORTUNITY_ID],
-                                       session_attrs[CC.SESS_ATTR_CURRENT_OPPORTUNITY_NAME])
+                                           session_attrs[CC.SESS_ATTR_CURRENT_OPPORTUNITY_NAME])
                 message = "No worries! See you next time!"
         else:
             message = "No worries! See you next time!"
 
     return LexUtils.close(CC.EMPTY_OBJ, True, message, CC.EMPTY_OBJ)
 
+
 def handle_alexa(event, context):
     intent_name = event['request']['intent']['name']
     slots = event['request']['intent']['slots']
     session_attrs = event['session'].get('attributes', {})
-    userId = event['session']['user']['userId']
-    is_voice = True
-    is_text = False
-    is_slack = False
     user = None
 
     # First, find out what opportunity type they are interested in hearing about
@@ -159,47 +107,16 @@ def handle_alexa(event, context):
     opportunity_type = slots[CC.SLOT_OPPORTUNITY_TYPE]['value']
     session_attrs[CC.SLOT_OPPORTUNITY_TYPE] = opportunity_type
 
-    # Next, lets find out if we need identifying info and if user is willing to provide identifying info
-    if CC.SESS_ATTR_STATE not in session_attrs:
-        # Voice clients mean we ask for phone number alone, not email address which is unreliable over voice
-        info_msg = "phone number"
-        message = "Would you be willing to provide your {} so we can lookup your green history and provide personalized service?".format(
-            info_msg)
-        session_attrs[CC.SESS_ATTR_STATE] = CC.SESS_STATE_AWAITING_IDENTIFY_INFO_WILLINGNESS
-        return AlexaUtils.elicit_slot(session_attrs, intent_name, slots, CC.SLOT_YES_NO_IDENTIFYING_INFO_WILLINGNESS,
-                                    "Personalized Service", message)
-
-    elif session_attrs[CC.SESS_ATTR_STATE] == CC.SESS_STATE_AWAITING_IDENTIFY_INFO_WILLINGNESS:
-
-        if AlexaUtils.is_yes(slots[CC.SLOT_YES_NO_IDENTIFYING_INFO_WILLINGNESS]):
-            info_msg = "phone number"
-            slot = CC.SLOT_PHONE
-            message = "Please provide your {} so we can lookup your green history and provide personalized service".format(
-                info_msg)
-            session_attrs[CC.SESS_ATTR_STATE] = CC.SESS_STATE_AWAITING_IDENTIFY_INFO
-            return AlexaUtils.elicit_slot(session_attrs, intent_name, slots, slot, "Phone Number", message)
-        else:
-            session_attrs[CC.SESS_ATTR_STATE] = CC.SESS_STATE_IDENTIFYING_INFO_COMPLETE
-            session_attrs[CC.SESS_ATTR_ANONYMOUS] = True
-
-    elif session_attrs[CC.SESS_ATTR_STATE] == CC.SESS_STATE_AWAITING_IDENTIFY_INFO:
-        session_attrs[CC.SESS_ATTR_STATE] = CC.SESS_STATE_IDENTIFYING_INFO_COMPLETE
-        slot = CC.SLOT_PHONE
-        id = slots[slot]['value'] if AlexaUtils.is_slot_present(slots, slot) else event[CC.EVENT_INPUT_TRANSCRIPT]
-        if len(id.strip()) > 0:
-            id_type = User.ID_TYPE_PHONE
-            session_attrs[CC.SESS_ATTR_ANONYMOUS] = False
-        else:
-            session_attrs[CC.SESS_ATTR_STATE] = CC.SESS_STATE_IDENTIFYING_INFO_COMPLETE
-            session_attrs[CC.SESS_ATTR_ANONYMOUS] = True
+    set_user_response = MiscUtils.set_session_user_id_and_type(event, True)
+    if set_user_response is not None:
+        return set_user_response
 
     # TODO: It would be natural if this if clause were part of the previous if clauses
     if session_attrs[CC.SESS_ATTR_STATE] != CC.SESS_STATE_AWAITING_OPPORTUNITY_CONF:
         # Store/load the user
         if not LexUtils.is_yes(session_attrs[CC.SESS_ATTR_ANONYMOUS]):
-            user = User.User(id, id_type)
-            session_attrs[CC.SESS_ATTR_USER_ID] = id
-            session_attrs[CC.SESS_ATTR_USER_ID_TYPE] = id_type
+            print("id:{}, type:{}".format(session_attrs[CC.SESS_ATTR_USER_ID], session_attrs[CC.SESS_ATTR_USER_ID_TYPE]))
+            user = User.User(session_attrs[CC.SESS_ATTR_USER_ID], session_attrs[CC.SESS_ATTR_USER_ID_TYPE])
         oppty_loader = GreenOpportunityFinder(opportunity_type, user)
         oppty = oppty_loader.find_opportunity()
 
@@ -225,7 +142,7 @@ def handle_alexa(event, context):
             else:
                 if user:
                     user.add_refused_oppty(session_attrs[CC.SESS_ATTR_CURRENT_OPPORTUNITY_ID],
-                                       session_attrs[CC.SESS_ATTR_CURRENT_OPPORTUNITY_NAME])
+                                           session_attrs[CC.SESS_ATTR_CURRENT_OPPORTUNITY_NAME])
                 message = "No worries! See you next time!"
         else:
             message = "No worries! See you next time!"
