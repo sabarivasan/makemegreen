@@ -69,9 +69,16 @@ def handle_lex(event, context):
             info_msg = "phone number" if is_voice else "phone number or email address"
             message = "Would you be willing to provide your {} so we can lookup your green history and provide personalized service?".format(
                 info_msg)
+            response_card = LexUtils.build_response_card(
+                'Lookup Information', 'Would you be willing to provide your information?',
+                [
+                    {'text': 'Yes, provide me with personalized service', 'value': 'Yes'},
+                    {'text': 'No, I would like to remain anonymous', 'value': 'No'}
+                ]
+            )
             session_attrs[CC.SESS_ATTR_STATE] = CC.SESS_STATE_AWAITING_IDENTIFY_INFO_WILLINGNESS
             return LexUtils.elicit_slot(session_attrs, intent_name, slots, CC.SLOT_YES_NO_IDENTIFYING_INFO_WILLINGNESS,
-                                        message, None)
+                                        message, response_card)
 
     elif session_attrs[CC.SESS_ATTR_STATE] == CC.SESS_STATE_AWAITING_IDENTIFY_INFO_WILLINGNESS:
 
@@ -121,8 +128,16 @@ def handle_lex(event, context):
             session_attrs[CC.SESS_ATTR_CURRENT_OPPORTUNITY_ID] = str(oppty['id'])
             session_attrs[CC.SESS_ATTR_CURRENT_OPPORTUNITY_NAME] = oppty['name']
             message = "{}. Would you like to give that a try?".format(oppty['user_text'])
+            response_card = LexUtils.build_response_card(
+                'Opportunity Response',
+                'Would you like to give that a try?',
+                [
+                    {'text': 'Yes', 'value': 'Yes'},
+                    {'text': 'No, not at this time', 'value': 'No'}
+                ]
+            )
             return LexUtils.elicit_slot(session_attrs, intent_name, slots, CC.SLOT_YES_NO_GREEN_OPPORTUNITY, message,
-                                        None)
+                                        response_card)
         else:
             message = "Sorry, we don't have any green tips for you at the moment!"
 
