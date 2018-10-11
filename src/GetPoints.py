@@ -8,17 +8,17 @@ def handle(event, content):
     slots = event['currentIntent']['slots']
     session_attrs = event['sessionAttributes'] if event['sessionAttributes'] is not None else {}
 
-    if not LexUtils.is_slot_present(slots, CC.EMAIL_ADDRESS):
+    if not LexUtils.is_slot_present(slots, CC.SLOT_EMAIL_ADDRESS):
         message = "Can you provide your email address so we can lookup your green history?"
-        return LexUtils.elicit_slot(session_attrs, intent_name, slots, CC.EMAIL_ADDRESS, message, None)
-    email_address = slots[CC.EMAIL_ADDRESS]
-    session_attrs[CC.EMAIL_ADDRESS] = email_address
+        return LexUtils.elicit_slot(session_attrs, intent_name, slots, CC.SLOT_EMAIL_ADDRESS, message, None)
+    email_address = slots[CC.SLOT_EMAIL_ADDRESS]
+    session_attrs[CC.SLOT_EMAIL_ADDRESS] = email_address
 
     user = User.User(email_address)
 
     points_period_days = 30
-    if LexUtils.is_slot_present(slots, CC.POINTS_TIME_PERIOD):
-        points_time_period = slots[CC.POINTS_TIME_PERIOD]
+    if LexUtils.is_slot_present(slots, CC.SLOT_POINTS_TIME_PERIOD):
+        points_time_period = slots[CC.SLOT_POINTS_TIME_PERIOD]
         if points_time_period == CC.WEEKLY:
             points_time_period = 7
         elif points_time_period == CC.YEARLY:

@@ -11,16 +11,6 @@ def close(session_attributes, fullfilled, message, responseCard):
         }
     }
 
-def cleanse_email(email_address):
-    if email_address.find("@") == -1:
-        return email_address.replace("-", "").replace("(", "").replace(")", "").replace(" ", "")
-    else:
-        email_address = email_address.strip(">").strip("<")
-        if email_address.find("|") != -1:
-            email_address = email_address.split("|")[1]
-        if email_address.find("mailto:") != -1:
-            email_address = email_address.split(":")[1]
-        return email_address
 
 def elicit_slot(session_attributes, intent_name, slots, slot_to_elicit, message, response_card):
     return {
@@ -56,7 +46,7 @@ def is_slot_present(slots, slot):
     return slot in slots and slots[slot] is not None
 
 def is_yes(val):
-    return "yes" == val.lower() or "true" == val.lower()
+    return "yes" == str(val).lower() or "true" == str(val).lower()
 
 def build_response_card(title, subtitle, options):
     """
@@ -77,3 +67,17 @@ def build_response_card(title, subtitle, options):
             'buttons': buttons
         }]
     }
+
+def cleanse_email(email_address):
+    email_address = email_address.strip(">")
+    email_address = email_address.strip("<")
+    if email_address.find("|") != -1:
+        email_address = email_address.split("|")[1]
+    if email_address.find("mailto:") != -1:
+        email_address = email_address.split(":")[1]
+
+    return email_address
+
+
+def looks_like_phone_number(val):
+    return val.isdigit()
