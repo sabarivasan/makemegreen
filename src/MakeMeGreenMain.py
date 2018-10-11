@@ -6,6 +6,7 @@ import GetPoints
 import GetProductRecommendation
 import AlexaUtils
 import GreenChallenge
+import GreenProfile
 
 
 def lambda_handler(event, context):
@@ -35,6 +36,8 @@ def lambda_handler(event, context):
         return AlexaUtils.delegate(event['session'].get('attributes', {}), intent_name, {})
     if CC.INTENT_GREEN_CHALLENGE == intent_name:
         return GreenChallenge.handle_alexa(event, context) if is_alexa else GreenChallenge.handle_lex(event, context)
+    if CC.INTENT_GREEN_PROFILE == intent_name:
+        return GreenProfile.handle_alexa(event, context) if is_alexa else GreenProfile.handle_lex(event, context)
     else:
         raise ValueError("Invalid intent")
 
@@ -67,59 +70,6 @@ if "__main__" == __name__:
             }
         },
         "sessionAttributes": {}
-    }
-
-    event = {
-        "messageVersion": "1.0",
-        "invocationSource": "DialogCodeHook",
-        "userId": "bytop04wev717a38tyrzhbj45k5flk2i",
-        "sessionAttributes": {},
-        "requestAttributes": None,
-        "bot": {
-            "name": "MakeMeGreen",
-            "alias": "$LATEST",
-            "version": "$LATEST"
-        },
-        "outputDialogMode": "Text",
-        "currentIntent": {
-            "name": "FindGreenOpportunity",
-            "slots": {
-                "opportunityType": None,
-                "homeOrWork": None,
-                "phone": None,
-                "yesNoGreenOpportunity": None,
-                "emailOrPhone": None,
-                "yesNoIdentifyingInfoWillingness": None
-            },
-            "slotDetails": {
-                "opportunityType": {
-                    "resolutions": [],
-                    "originalValue": None
-                },
-                "homeOrWork": {
-                    "resolutions": [],
-                    "originalValue": None
-                },
-                "phone": {
-                    "resolutions": [],
-                    "originalValue": None
-                },
-                "yesNoGreenOpportunity": {
-                    "resolutions": [],
-                    "originalValue": None
-                },
-                "emailOrPhone": {
-                    "resolutions": [],
-                    "originalValue": None
-                },
-                "yesNoIdentifyingInfoWillingness": {
-                    "resolutions": [],
-                    "originalValue": None
-                }
-            },
-            "confirmationStatus": "None"
-        },
-        "inputTranscript": "make me green"
     }
 
     print(json.dumps(lambda_handler(event, None)))
