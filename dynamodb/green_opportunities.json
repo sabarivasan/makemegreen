@@ -2,65 +2,137 @@
     {
         "id" : 1,
         "name" : "steel cutlery",
+        "tags" : ["home", "work"],
         "type" : "plastic",
-        "person_points_per_day": 1,
-        "user_text": "Did you know that 40 billion disposable plastic utensils are used in the U.S. every year?\nConsider keeping one set of stainless steel cutlery and washing them after use.\nThis gives you 1 green points per day!"
+        "person_points_per_week": 7,
+        "user_text": "Did you know that 40 billion disposable plastic utensils are used in the U.S. every year?\nConsider keeping one set of stainless steel cutlery and washing them after use.\nThis gives you 7 green points per week!"
     },
     {
         "id" : 2,
-        "name" : "grocery bag",
+        "name" : "reusable grocery bags",
+        "tags": ["home"],
         "type" : "plastic",
-        "person_points_per_day": 1,
-        "user_text": "Did you know that a single plastic bag can take upto 1000 years to degrade.\nConsider taking one or more reusable cloth bags to the grocery store.\nYou can buy them at most grocery stores.\nEach reusable bag gives you 1 green points per day!"
+        "person_points_per_week": 21,
+        "user_text": "Did you know that a single plastic bag can take upto 1000 years to degrade.\nConsider taking one or more reusable cloth bags to the grocery store.\nYou can buy them at most grocery stores.\nEach reusable bag gives you 21 green points per week!"
     },
     {
         "id" : 3,
         "name" : "takeout containers",
+        "tags": ["home"],
         "type" : "plastic",
-        "person_points_per_day": 1,
-        "user_text": "Did you know that using aluminum or glass containers is always preferable over plastic. \nConsider taking your own carry-out container when you dine out.\nYou can keep one in your car at all times\nEach reusable bag gives you 1 green points per day!"
+        "person_points_per_week": 18,
+        "user_text": "Did you know that Americans consume 200 million plastic food containers every day? \nConsider taking your own carry-out container when you dine out.\nYou can keep one in your car at all times\nEach takeout container gives you 18 green points per week!"
     },
     {
         "id" : 4,
-        "name" : "resuable bottle",
+        "name" : "reusable bottle",
+        "tags": ["home", "work"],
         "type" : "plastic",
-        "person_points_per_day": 1,
-        "user_text":"Did you know that Americans throw away 35 billion plastic bottles every year.\nConsider taking your own bottle or mug when you go to a coffee or juice shop\nEach reusable drinkware gives you 1 green points per day!"
+        "person_points_per_week": 14,
+        "user_text":"Did you know that Americans throw away 35 billion plastic bottles every year.\nConsider taking your own bottle or mug when you go to juice shop\nEach reusable drinkware gives you 14 green point per week!"
     },
     {
         "id" : 5,
-        "name" : "straws",
+        "name" : "no more plastic straws",
+        "tags": ["home", "work"],
         "type" : "plastic",
-        "person_points_per_day": 1,
-        "user_text": "Did you know that Americans use 500 Million Straws Every Single Day?\nConsider not using a straw or using a steel straw when you dine out next.\nRefusing straws you 1 green points per day!"
+        "person_points_per_week": 7,
+        "user_text": "Did you know that Americans use 500 Million Straws Every Single Day?\nConsider not using a straw or using a steel straw when you dine out next.\nRefusing straws you 7 green points per week!"
     },
     {
         "id" : 6,
-        "name" : "shower",
+        "name" : "shower habits",
+        "tags": ["home"],
         "type" : "water",
-        "person_points_per_day": 5,
-        "user_text": "Did you know that the average American shower uses 17.2 gallons (65.1 liters) and lasts for 8.2 minutes at average flow rate of 2.1 gallons per minute (gpm) (7.9 lpm).\nConsider limiting your shower to 5 minutes every day.\nAlso, consider shutting off the water while you are lathering.\nThis saves 70 gallons of water per week and gives you 5 green points per day!"
+        "person_points_per_week": 50,
+        "user_text": "Did you know that the average American shower uses 17.2 gallons (65.1 liters) and lasts for 8.2 minutes at average flow rate of 2.1 gallons per minute (gpm) (7.9 lpm).\nConsider limiting your shower to 5 minutes every day.\nAlso, consider shutting off the water while you are lathering.\nThis saves 70 gallons of water per week and gives you 50 green points per week!"
     },
     {
         "id" : 7,
-        "name" : "dishwasher",
+        "name" : "use dishwasher instead of hand-washing",
+        "tags": ["home"],
         "type" : "water",
-        "person_points_per_day": 5,
-        "user_text": "Did you know that You use up to 27 gallons of water per load by hand versus as little as 3 gallons with an ENERGY STAR-rated dishwasher.\nUse a dishwasher as much as possible. Just scrape off large food scraps before loading!!\nThis saves 200 gallons of water per week and gives you 5 green points per day!"
+        "person_points_per_week": 28,
+        "user_text": "Did you know that you use up to 27 gallons of water per load by hand versus as little as 3 gallons with an ENERGY STAR-rated dishwasher.\nUse a dishwasher as much as possible. Just scrape off large food scraps before loading!!\nThis saves 200 gallons of water per week and gives you 28 green points per week!"
     },
     {
         "id" : 8,
-        "name" : "garden",
+        "name" : "native garden instead of lawn",
+        "tags": ["home"],
         "type" : "water",
-        "person_points_per_day": 10,
-        "user_text": "Did you know that one-third of residential water use goes toward watering the lawn and garden?\nBut flowers, grasses, and bushes native to the area have adapted to regional rainfall rates—so require no water—and have better defenses against predators.\nAnother bonus: Native plants foster healthy soil and insect life, which attract birds and enhance overall biodiversity.\nThis saves 20 gallons of water per day and gives you 10 green points per day!"
-
+        "person_points_per_week": 84,
+        "user_text": "Did you know that one-third of residential water use goes toward watering the lawn and garden?\nBut flowers, grasses, and bushes native to the area have adapted to regional rainfall rates—so require no water—and have better defenses against predators.\nAnother bonus: Native plants enhance overall biodiversity.\nThis saves 20 gallons of water per day and gives you 84 green points per week!"
     },
     {
         "id" : 9,
-        "name" : "water leaks",
+        "name" : "fix water leaks",
+        "tags": ["home", "work"],
         "type" : "water",
-        "person_points_per_day": 5,
-        "user_text": "Did you know that a 1/16-inch opening in a leaking faucet could waste up to 100 gallons a day?\nTour your home monthly, inside and out, in search of dripping faucets, showerheads, hoses, and sprinklers.\nDrop a dye tablet or food coloring in the tank yearly to see if the color of the water in the bowl changes color. If it does, your toilet needs a replacement rubber flapper or fill mechanism.\nThis saves 10 gallons of water per day and gives you 5 green points per day!"
+        "person_points_per_week": 25,
+        "user_text": "Did you know that a 1/16-inch opening in a leaking faucet could waste up to 100 gallons a day?\nTour your home or work monthly, find dripping faucets, showerheads, hoses, and sprinklers and fix them.\nThis saves 10 gallons of water per day and gives you 25 green points per week!"
+    },
+    {
+        "id" : 10,
+        "name" : "dont leave the tap running",
+        "tags": ["home", "work"],
+        "type" : "water",
+        "person_points_per_week": 21,
+        "user_text": "Did you know that closing the tap while you wash, brush, etc can save up to 15 gallons a day?\nThis gives you 21 green points per week!"
+    },
+    {
+        "id" : 11,
+        "name" : "use cloth instead of paper",
+        "tags": ["home", "work"],
+        "type" : "paper",
+        "person_points_per_week": 21,
+        "user_text": "Did you know that we currently use more than 13 billion pounds of paper towels each year which equals more than 3,000 tons of paper towel waste?\nUse a cloth towel instead of paper towel whenenver you can.\nThis gives you 21 green points per week!"
+    },
+    {
+        "id" : 12,
+        "name" : "use cloth towel instead of paper towel",
+        "tags": ["home", "work"],
+        "type" : "paper",
+        "person_points_per_week": 21,
+        "user_text": "Did you know that we currently use more than 13 billion pounds of paper towels each year which equals more than 3,000 tons of paper towel waste?\nUse a cloth towel instead of paper towel whenenver you can.\nThis gives you 21 green points per week!"
+    },
+    {
+        "id" : 13,
+        "name" : "paperless",
+        "tags": ["home", "work"],
+        "type" : "paper",
+        "person_points_per_week": 7,
+        "user_text": "Did you know that despite having only 5% of the world’s population, the U.S. uses 30% of the world’s paper?\nUse electronically copies instead of paper materials whenenver possible.\nThis gives you 7 green points per week!"
+    },
+    {
+        "id" : 14,
+        "name" : "print double-sided",
+        "tags": ["home", "work"],
+        "type" : "paper",
+        "person_points_per_week": 21,
+        "user_text": "Did you know that it takes an average of 5 liters of water to produce one piece of A4 paper?\nPrint double-sided to reduce paper waste by 50%.\nThis gives you 21 green points per week!"
+    },
+    {
+        "id" : 15,
+        "name" : "recycle used paper",
+        "tags": ["home", "work"],
+        "type" : "paper",
+        "person_points_per_week": 21,
+        "user_text": "Did you know that recycling 1 ton of paper saves around 682 gallons of oil, 26500 liters of water and 17 trees?\nRecycle unwanted papers in office and home.\nThis gives you 21 green points per week!"
+    },
+    {
+        "id" : 16,
+        "name" : "reusable coffee mugs",
+        "tags": ["home", "work"],
+        "type" : "paper",
+        "person_points_per_week": 14,
+        "user_text":"Did you know that paper cups are not recyclable because of the plastic liner and coffee contamination?\nConsider taking your own  mug when you go to starbucks.\nEach reusable mug gives you 14 green point per week!"
+    },
+    {
+        "id" : 17,
+        "name" : "recycled papers",
+        "tags": ["home", "work"],
+        "type" : "paper",
+        "person_points_per_week": 14,
+        "user_text":"Did you know that recycled papers look and feel as fine as non-recycled papers?\nInvest in recycled papers.\nThis gives you 14 green point per week!"
     }
 ]

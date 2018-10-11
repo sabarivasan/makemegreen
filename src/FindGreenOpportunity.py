@@ -31,7 +31,8 @@ from GreenOpportunityLoader import GreenOpportunityFinder
 def handle_lex(event, context):
     intent_name = event['currentIntent']['name']
     slots = event['currentIntent']['slots']
-    session_attrs = event['sessionAttributes'] if event['sessionAttributes'] is not None else {}
+    session_attrs = event['sessionAttributes'] if 'sessionAttributes' in event and event['sessionAttributes'] is not None else {}
+    request_attrs = event['requestAttributes'] if 'requestAttributes' in event and event['requestAttributes'] is not None else {}
     user = None
 
     # First, find out what opportunity type they are interested in hearing about
@@ -59,7 +60,11 @@ def handle_lex(event, context):
         # Store/load the user
         if not LexUtils.is_yes(session_attrs[CC.SESS_ATTR_ANONYMOUS]):
             user = User.User(session_attrs[CC.SESS_ATTR_USER_ID], session_attrs[CC.SESS_ATTR_USER_ID_TYPE])
-        oppty_loader = GreenOpportunityFinder(opportunity_type, user)
+
+        # Tag: home or work
+        tag = slots[CC.SLOT_HOME_OR_WORK] if LexUtils.is_slot_present(slots, CC.SLOT_HOME_OR_WORK) else None
+
+        oppty_loader = GreenOpportunityFinder(opportunity_type, user, tag)
         oppty = oppty_loader.find_opportunity()
 
         if oppty:
@@ -67,8 +72,16 @@ def handle_lex(event, context):
             session_attrs[CC.SESS_ATTR_CURRENT_OPPORTUNITY_ID] = str(oppty['id'])
             session_attrs[CC.SESS_ATTR_CURRENT_OPPORTUNITY_NAME] = oppty['name']
             message = "{}. Would you like to give that a try?".format(oppty['user_text'])
+            response_card = LexUtils.build_response_card(
+                'Opportunity Response',
+                'Would you like to give that a try?',
+                [
+                    {'text': 'Yes', 'value': 'Yes'},
+                    {'text': 'No, not at this time', 'value': 'No'}
+                ]
+            )
             return LexUtils.elicit_slot(session_attrs, intent_name, slots, CC.SLOT_YES_NO_GREEN_OPPORTUNITY, message,
-                                        None)
+                                        response_card)
         else:
             message = "Sorry, we don't have any green tips for you at the moment!"
 
@@ -117,7 +130,11 @@ def handle_alexa(event, context):
         if not LexUtils.is_yes(session_attrs[CC.SESS_ATTR_ANONYMOUS]):
             print("id:{}, type:{}".format(session_attrs[CC.SESS_ATTR_USER_ID], session_attrs[CC.SESS_ATTR_USER_ID_TYPE]))
             user = User.User(session_attrs[CC.SESS_ATTR_USER_ID], session_attrs[CC.SESS_ATTR_USER_ID_TYPE])
-        oppty_loader = GreenOpportunityFinder(opportunity_type, user)
+
+        # Tag: home or work
+        tag = slots[CC.SLOT_HOME_OR_WORK]['value'] if AlexaUtils.is_slot_present(slots, CC.SLOT_HOME_OR_WORK) else None
+
+        oppty_loader = GreenOpportunityFinder(opportunity_type, user, tag)
         oppty = oppty_loader.find_opportunity()
 
         if oppty:

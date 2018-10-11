@@ -13,7 +13,7 @@ table = dynamodb.create_table(
         },
         {
             'KeyType': 'RANGE',
-            'AttributeName': 'person_points_per_day'
+            'AttributeName': 'person_points_per_week'
         }
     ],
     GlobalSecondaryIndexes=[
@@ -26,7 +26,7 @@ table = dynamodb.create_table(
                 },
                 {
                     'KeyType': 'RANGE',
-                    'AttributeName': 'person_points_per_day'
+                    'AttributeName': 'person_points_per_week'
                 }
             ],
             # Note: since we are projecting all the attributes of the table
@@ -51,7 +51,7 @@ table = dynamodb.create_table(
             'AttributeType': 'S'
         },
         {
-            'AttributeName': 'person_points_per_day',
+            'AttributeName': 'person_points_per_week',
             'AttributeType': 'N'
         }
     ],
