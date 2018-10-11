@@ -20,6 +20,7 @@ COL_ID='id'
 COL_ID_TYPE='id_type'   #Slack|Phone|Email
 COL_IMPLEMENTED_OPPORTUNITIES = 'implemented_opportunities'
 COL_REFUSED_OPPORTUNITIES = 'refused_opportunities'
+COL_FROM = 'from'
 
 class User:
 
@@ -74,7 +75,7 @@ class User:
         return self.user[attr_name] if attr_name in self.user else default_val
 
     def add_implemented_oppty(self, oppty_id, oppty_name):
-        implemented_oppty = {'id': oppty_id, 'name': oppty_name, 'from': int(time.time())}
+        implemented_oppty = {'id': oppty_id, 'name': oppty_name, COL_FROM: int(time.time())}
         self.add_field_to_arr(implemented_oppty, COL_IMPLEMENTED_OPPORTUNITIES)
 
     def add_refused_oppty(self, oppty_id, oppty_name):

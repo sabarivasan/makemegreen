@@ -11,6 +11,7 @@ What is my green profile?
 import LexUtils
 import Constants as CC
 import User
+from GreenPointsCalculator import GreenPointsCalculator
 
 def handle_lex(event, context):
     intent_name = event['currentIntent']['name']
@@ -55,6 +56,13 @@ def handle_lex(event, context):
             message = "We cannot lookup your green profile without identifying info"
             return LexUtils.close(CC.EMPTY_OBJ, True, message, CC.EMPTY_OBJ)
 
-        user = User.User(id, id_type)
-        session_attrs[CC.SESS_ATTR_USER_ID] = id
-        session_attrs[CC.SESS_ATTR_USER_ID_TYPE] = id_type
+    user = User.User(id, id_type)
+    session_attrs[CC.SESS_ATTR_USER_ID] = id
+    session_attrs[CC.SESS_ATTR_USER_ID_TYPE] = id_type
+    calculator = GreenPointsCalculator(user)
+    (num_implemented, points) = calculator.calculate_points(0)
+    message = "You have implemented {} opportunities and have {} points!!".format(num_implemented, points)
+    return LexUtils.close(CC.EMPTY_OBJ, True, message, CC.EMPTY_OBJ)
+
+
+

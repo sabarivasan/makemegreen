@@ -6,6 +6,7 @@ import GetPoints
 import GetProductRecommendation
 import AlexaUtils
 import GreenChallenge
+import GreenProfile
 
 
 def lambda_handler(event, context):
@@ -33,6 +34,8 @@ def lambda_handler(event, context):
         return GetProductRecommendation.handle_alexa(event, context) if is_alexa else GetProductRecommendation.handle_lex(event, context)
     if CC.INTENT_GREEN_CHALLENGE == intent_name:
         return GreenChallenge.handle_alexa(event, context) if is_alexa else GreenChallenge.handle_lex(event, context)
+    if CC.INTENT_GREEN_PROFILE == intent_name:
+        return GreenProfile.handle_alexa(event, context) if is_alexa else GreenProfile.handle_lex(event, context)
     else:
         raise ValueError("Invalid intent")
 
@@ -65,60 +68,49 @@ if "__main__" == __name__:
             }
         },
         "sessionAttributes": {}
-    }
-    
+    };
+
     
     event =  {
     "messageVersion": "1.0",
     "invocationSource": "DialogCodeHook",
-    "userId": "bytop04wev717a38tyrzhbj45k5flk2i",
-    "sessionAttributes": {},
-    "requestAttributes": None,
+    "userId": "ea4b1552-45f0-4fe1-ab45-b3a9b0e46485:TDAGGP9DH:UDAE42BA4",
+    "sessionAttributes": None,
+    "requestAttributes": {
+        "x-amz-lex:channel-id": "ea4b1552-45f0-4fe1-ab45-b3a9b0e46485",
+        "x-amz-lex:webhook-endpoint-url": "https://channels.lex.us-east-1.amazonaws.com/slack/webhook/ea4b1552-45f0-4fe1-ab45-b3a9b0e46485",
+        "x-amz-lex:accept-content-types": "PlainText",
+        "x-amz-lex:user-id": "452560791459.454526013046",
+        "x-amz-lex:slack-team-id": "TDAGGP9DH",
+        "x-amz-lex:slack-bot-token": "xoxb-452560791459-453003707012-7AZT1oG1DlRqmIhaPIlR2L8Y",
+        "x-amz-lex:channel-name": "BotSlackIntegration",
+        "x-amz-lex:channel-type": "Slack"
+    },
     "bot": {
         "name": "MakeMeGreen",
-        "alias": "$LATEST",
-        "version": "$LATEST"
+        "alias": "verA",
+        "version": "13"
     },
     "outputDialogMode": "Text",
     "currentIntent": {
-        "name": "FindGreenOpportunity",
+        "name": "GreenProfile",
         "slots": {
-            "opportunityType": None,
-            "homeOrWork": None,
             "phone": None,
-            "yesNoGreenOpportunity": None,
-            "emailOrPhone": None,
-            "yesNoIdentifyingInfoWillingness": None
+            "emailOrPhone": None
         },
         "slotDetails": {
-            "opportunityType": {
-                "resolutions": [],
-                "originalValue": None
-            },
-            "homeOrWork": {
-                "resolutions": [],
-                "originalValue": None
-            },
             "phone": {
-                "resolutions": [],
-                "originalValue": None
-            },
-            "yesNoGreenOpportunity": {
                 "resolutions": [],
                 "originalValue": None
             },
             "emailOrPhone": {
                 "resolutions": [],
                 "originalValue": None
-            },
-            "yesNoIdentifyingInfoWillingness": {
-                "resolutions": [],
-                "originalValue": None
             }
         },
         "confirmationStatus": "None"
     },
-    "inputTranscript": "make me green"
+    "inputTranscript": "what is my green profile"
 }
 
     print(json.dumps(lambda_handler(event, None)))
