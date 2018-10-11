@@ -1,0 +1,52 @@
+{
+    "messageVersion": "1.0",
+    "invocationSource": "DialogCodeHook",
+    "userId": "58qdaz6m5couwf7qkfd6d9wjjiovkl5v",
+    "sessionAttributes": null,
+    "requestAttributes": null,
+    "bot": {
+        "name": "MakeMeGreen",
+        "alias": "$LATEST",
+        "version": "$LATEST"
+    },
+    "outputDialogMode": "Voice",
+    "currentIntent": {
+        "name": "FindGreenOpportunity",
+        "slots": {
+            "opportunityType": null,
+            "yesNo": null,
+            "emailAddress": null,
+            "phoneNumber": null,
+            "opportunityTask": null,
+            "lookupType": null
+        },
+        "slotDetails": {
+            "opportunityType": {
+                "resolutions": [],
+                "originalValue": null
+            },
+            "yesNo": {
+                "resolutions": [],
+                "originalValue": null
+            },
+            "emailAddress": {
+                "resolutions": [],
+                "originalValue": null
+            },
+            "phoneNumber": {
+                "resolutions": [],
+                "originalValue": null
+            },
+            "opportunityTask": {
+                "resolutions": [],
+                "originalValue": null
+            },
+            "lookupType": {
+                "resolutions": [],
+                "originalValue": null
+            }
+        },
+        "confirmationStatus": "None"
+    },
+    "inputTranscript": "make me green"
+}
