@@ -13,7 +13,7 @@ class GreenProductLoader:
             # Find products by type
             response = product_rec_table.query(
                 IndexName='idx_category',
-                KeyConditionExpression=Key('category').eq(product_category),
+                KeyConditionExpression=Key('category').eq(product_category.lower()),
                 ScanIndexForward=False
             )
             if response['Count'] > 0:
