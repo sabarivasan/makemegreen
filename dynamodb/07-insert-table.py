@@ -12,8 +12,8 @@ if table_name.startswith('green'):
 	file_name = '{}.json'.format(table_name)
 	with open(file_name) as json_file:
 	    items = json.load(json_file)
-	    for item in items:
 
+	    for item in items:
 	        print("Adding item:", str(item))
 
 	        table.put_item(
