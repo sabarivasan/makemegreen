@@ -27,6 +27,6 @@ class GreenPointsCalculator:
                 num_seconds = (now - start)
             else:
                 num_seconds = now - io[User.COL_FROM]
-            tot_points += oppty.get_person_points_per_week() * num_seconds / SECONDS_PER_DAY / DAYS_PER_WEEK
+            tot_points += float(oppty.get_person_points_per_week() * num_seconds / SECONDS_PER_DAY / DAYS_PER_WEEK)
 
         return (num_implemented, int(tot_points))
