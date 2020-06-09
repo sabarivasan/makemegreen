@@ -24,5 +24,6 @@ I hope you consider MakeMeGreen for the AWS awards and help offset some of the c
 AWS Tech used: Lex, Alexa, Lambda, DynamoDB
 
 The following is a pictorial description of what we built for the hackathon and what we plan to build in the future:
+https://github.com/sabarivasan/makemegreen/blob/master/Green%20companion%20chatbot.png
 
 
